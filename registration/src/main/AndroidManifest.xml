@@ -2,8 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="am.chamich.app.registration">
 
-    <application>
-        <activity android:name=".RegistrationActivity"></activity>
+    <application android:theme="@style/Platform.MaterialComponents.Light">
+        <activity android:name=".features.RegistrationActivity" />
     </application>
 
 </manifest>

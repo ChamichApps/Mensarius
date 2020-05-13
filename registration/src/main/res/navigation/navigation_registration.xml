@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation_registration"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="am.chamich.app.registration.features.home.HomeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/action_homeFragment_to_signInFragment"
+            app:destination="@id/destination_fragment_sign_in" />
+    </fragment>
+    <fragment
+        android:id="@+id/destination_fragment_sign_in"
+        android:name="am.chamich.app.registration.features.signin.SignInFragment"
+        android:label="SignInFragment">
+        <action
+            android:id="@+id/action_signInFragment_to_restorePasswordFragment"
+            app:destination="@id/destination_fragment_restore_password" />
+        <action
+            android:id="@+id/action_signInFragment_to_signUpFragment"
+            app:destination="@id/destination_fragment_sign_up" />
+    </fragment>
+    <fragment
+        android:id="@+id/destination_fragment_restore_password"
+        android:name="am.chamich.app.registration.features.password.RestorePasswordFragment"
+        android:label="RestorePasswordFragment" />
+    <fragment
+        android:id="@+id/destination_fragment_sign_up"
+        android:name="am.chamich.app.registration.features.signup.SignUpFragment"
+        android:label="SignUpFragment" />
+</navigation>
