@@ -1,4 +1,4 @@
-This module providing following features
+This module is providing following features
 
 * Sign In
 * Sign Up
