@@ -26,12 +26,12 @@ class SignInFragmentTest {
     }
 
     @Test
-    fun verifyErrorShownWhenWrongEmailProvided() {
+    fun when_IncorrectEmailProvided_then_ErrorMessageIsShown() {
         enterWrongEmailAndVerify()
     }
 
     @Test
-    fun verifyErrorDisappearingAfterProvidingCorrectEmail() {
+    fun when_CorrectEmailIsProvided_then_ErrorMessageIsDisappearing() {
         enterWrongEmailAndVerify()
 
         onView(withId(R.id.edit_text_email)).perform(replaceText(CORRECT_EMAIL))
