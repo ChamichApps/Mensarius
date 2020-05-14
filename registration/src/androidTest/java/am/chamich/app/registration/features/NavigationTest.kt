@@ -10,7 +10,10 @@ import androidx.test.rule.ActivityTestRule
 import org.junit.Rule
 import org.junit.Test
 
-class RegistrationActivityTest {
+/**
+ * Test checks that navigation through the flow works.
+ */
+class NavigationTest {
 
     @Rule
     @JvmField
