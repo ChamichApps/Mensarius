@@ -3,6 +3,7 @@ package am.chamich.app.registration.features.signin
 import am.chamich.app.registration.R
 import am.chamich.app.registration.databinding.SignInFragmentBinding
 import am.chamich.app.registration.extensions.isValidEmail
+import am.chamich.app.registration.features.RegistrationActivity
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,11 +12,20 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import javax.inject.Inject
 
 class SignInFragment : Fragment() {
 
+    @Inject
+    lateinit var viewModelFactory: ViewModelProvider.Factory
+
     private lateinit var binding: SignInFragmentBinding
     private lateinit var viewModel: SignInViewModel
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        inject()
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -30,7 +40,7 @@ class SignInFragment : Fragment() {
 
     fun onSignInClicked(view: View) {
         if (isEmailInputCorrect()) {
-            // TODO: Start Sign In Process
+            viewModel.signIn("", "")
         }
     }
 
@@ -44,7 +54,7 @@ class SignInFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(SignInViewModel::class.java)
+        viewModel = ViewModelProvider(this, viewModelFactory)[SignInViewModel::class.java]
     }
 
     private fun isEmailInputCorrect(): Boolean {
@@ -56,5 +66,11 @@ class SignInFragment : Fragment() {
             binding.textInputLayoutEmail.error = ""
         }
         return isEmailValid
+    }
+
+    private fun inject() {
+        (requireActivity() as? RegistrationActivity)
+            ?.activityComponent
+            ?.inject(this)
     }
 }

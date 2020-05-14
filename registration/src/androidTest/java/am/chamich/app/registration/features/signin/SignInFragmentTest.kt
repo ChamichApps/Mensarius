@@ -1,8 +1,12 @@
 package am.chamich.app.registration.features.signin
 
 
+import am.chamich.app.registration.MockedAuthenticator
 import am.chamich.app.registration.R
+import am.chamich.app.registration.ViewModelFactory
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentFactory
+import androidx.fragment.app.testing.FragmentScenario
 import androidx.fragment.app.testing.launchFragmentInContainer
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions.click
@@ -20,19 +24,17 @@ class SignInFragmentTest {
 
     @Before
     fun setup() {
-        launchFragmentInContainer<SignInFragment>(
-            null, R.style.Theme_MaterialComponents_Light, FragmentFactory()
-        )
+        launchFragment()
     }
 
     @Test
     fun when_IncorrectEmailProvided_then_ErrorMessageIsShown() {
-        enterWrongEmailAndVerify()
+        enterIncorrectEmailWithVerification()
     }
 
     @Test
-    fun when_CorrectEmailIsProvided_then_ErrorMessageIsDisappearing() {
-        enterWrongEmailAndVerify()
+    fun when_CorrectEmailProvided_then_ErrorMessageIsDisappearing() {
+        enterIncorrectEmailWithVerification()
 
         onView(withId(R.id.edit_text_email)).perform(replaceText(CORRECT_EMAIL))
         onView(withId(R.id.button_sign_in)).perform(click())
@@ -41,7 +43,17 @@ class SignInFragmentTest {
             .check(matches(not(isDisplayed())))
     }
 
-    private fun enterWrongEmailAndVerify() {
+    private fun launchFragment(): FragmentScenario<SignInFragment> {
+        return launchFragmentInContainer(factory = object : FragmentFactory() {
+            override fun instantiate(classLoader: ClassLoader, className: String): Fragment {
+                return SignInFragment().apply {
+                    viewModelFactory = ViewModelFactory(MockedAuthenticator())
+                }
+            }
+        }, themeResId = R.style.Theme_MaterialComponents_Light)
+    }
+
+    private fun enterIncorrectEmailWithVerification() {
         onView(withId(R.id.edit_text_email)).perform(replaceText(INCORRECT_EMAIL))
         onView(withId(R.id.button_sign_in)).perform(click())
 
