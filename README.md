@@ -4,3 +4,5 @@
 
 * Data Binding
 * Navigation
+* Dagger 2
+* Mockk
