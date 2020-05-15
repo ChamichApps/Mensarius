@@ -3,7 +3,9 @@ package am.chamich.app.registration.features.signin
 import am.chamich.app.registration.R
 import am.chamich.app.registration.databinding.SignInFragmentBinding
 import am.chamich.app.registration.extensions.isValidEmail
+import am.chamich.app.registration.extensions.isValidPassword
 import am.chamich.app.registration.features.RegistrationActivity
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -22,11 +24,6 @@ class SignInFragment : Fragment() {
     private lateinit var binding: SignInFragmentBinding
     private lateinit var viewModel: SignInViewModel
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        inject()
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -36,6 +33,11 @@ class SignInFragment : Fragment() {
         )
         binding.fragment = this
         return binding.root
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        inject()
     }
 
     fun onSignInClicked(view: View) {
@@ -57,19 +59,17 @@ class SignInFragment : Fragment() {
         viewModel = ViewModelProvider(this, viewModelFactory)[SignInViewModel::class.java]
     }
 
-    private fun isEmailInputCorrect(): Boolean {
-        val isEmailValid = binding.editTextEmail.editableText.toString().isValidEmail
-        binding.textInputLayoutEmail.isErrorEnabled = isEmailValid
-        if (!isEmailValid) {
-            binding.textInputLayoutEmail.error = getString(R.string.error_email_not_valid)
-        } else {
-            binding.textInputLayoutEmail.error = ""
-        }
-        return isEmailValid
+    private fun isEmailInputCorrect() = binding.editTextEmail.text.toString().isValidEmail.apply {
+        val textInputLayout = binding.textInputLayoutEmail
+        textInputLayout.error = if (!this) getString(R.string.error_email_invalid) else null
+        textInputLayout.isErrorEnabled = !this
     }
 
-    private fun isPasswordInputCorrect(): Boolean {
-        return false
+    private fun isPasswordInputCorrect() =
+        binding.editTextPassword.text.toString().isValidPassword.apply {
+            val textInputLayout = binding.textInputLayoutPassword
+            textInputLayout.error = if (!this) getString(R.string.error_password_invalid) else null
+            textInputLayout.isErrorEnabled = !this
     }
 
     private fun inject() {
