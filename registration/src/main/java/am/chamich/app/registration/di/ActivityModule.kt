@@ -12,5 +12,9 @@ class ActivityModule(private val context: Context) {
 
     @Singleton
     @Provides
-    fun providesAuthenticator(): IAuthenticator = Authenticator()
+    fun provideContext() = context
+
+    @Singleton
+    @Provides
+    fun providesAuthenticator(): IAuthenticator = Authenticator(context)
 }
