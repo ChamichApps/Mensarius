@@ -13,6 +13,7 @@ import androidx.test.espresso.action.ViewActions.replaceText
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import io.mockk.confirmVerified
 import io.mockk.mockk
 import io.mockk.verify
 import org.hamcrest.Matchers.not
@@ -61,6 +62,8 @@ class SignInFragmentTest {
             .check(matches(withText(R.string.error_email_not_valid)))
 
         verify(exactly = 0) { mockedViewModel.signIn(any(), any()) }
+
+        confirmVerified(mockedViewModel)
     }
 
     private fun enterCorrectEmailWithVerification() {
@@ -71,6 +74,8 @@ class SignInFragmentTest {
             .check(matches(not(isDisplayed())))
 
         verify(exactly = 0) { mockedViewModel.signIn(any(), any()) }
+
+        confirmVerified(mockedViewModel)
     }
 
     companion object {
