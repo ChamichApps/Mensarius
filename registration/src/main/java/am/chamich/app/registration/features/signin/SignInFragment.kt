@@ -39,7 +39,7 @@ class SignInFragment : Fragment() {
     }
 
     fun onSignInClicked(view: View) {
-        if (isEmailInputCorrect()) {
+        if (isEmailInputCorrect() && isPasswordInputCorrect()) {
             viewModel.signIn("", "")
         }
     }
@@ -66,6 +66,10 @@ class SignInFragment : Fragment() {
             binding.textInputLayoutEmail.error = ""
         }
         return isEmailValid
+    }
+
+    private fun isPasswordInputCorrect(): Boolean {
+        return false
     }
 
     private fun inject() {
