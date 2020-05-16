@@ -1,22 +1,23 @@
 package am.chamich.app.registration.features.signin
 
 import am.chamich.app.registration.R
+import am.chamich.app.registration.core.CoreFragment
 import am.chamich.app.registration.databinding.SignInFragmentBinding
 import am.chamich.app.registration.extensions.isValidEmail
 import am.chamich.app.registration.extensions.isValidPassword
-import am.chamich.app.registration.features.RegistrationActivity
+import am.chamich.app.registration.extensions.textAsString
 import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import kotlinx.android.synthetic.main.sign_in_fragment.*
 import javax.inject.Inject
 
-class SignInFragment : Fragment() {
+class SignInFragment : CoreFragment() {
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
@@ -40,17 +41,17 @@ class SignInFragment : Fragment() {
         inject()
     }
 
-    fun onSignInClicked(view: View) {
+    fun onSignInClicked() {
         if (isEmailInputCorrect() && isPasswordInputCorrect()) {
-            viewModel.signIn("", "")
+            viewModel.signIn(edit_text_email.textAsString, edit_text_password.textAsString)
         }
     }
 
-    fun onSignUpClicked(view: View) {
+    fun onSignUpClicked() {
         findNavController().navigate(R.id.destination_fragment_sign_up)
     }
 
-    fun onRestorePasswordClicked(view: View) {
+    fun onRestorePasswordClicked() {
         findNavController().navigate(R.id.destination_fragment_restore_password)
     }
 
@@ -59,22 +60,20 @@ class SignInFragment : Fragment() {
         viewModel = ViewModelProvider(this, viewModelFactory)[SignInViewModel::class.java]
     }
 
-    private fun isEmailInputCorrect() = binding.editTextEmail.text.toString().isValidEmail.apply {
+    private fun isEmailInputCorrect() = binding.editTextEmail.textAsString.isValidEmail.apply {
         val textInputLayout = binding.textInputLayoutEmail
         textInputLayout.error = if (!this) getString(R.string.error_email_invalid) else null
         textInputLayout.isErrorEnabled = !this
     }
 
     private fun isPasswordInputCorrect() =
-        binding.editTextPassword.text.toString().isValidPassword.apply {
+        binding.editTextPassword.textAsString.isValidPassword.apply {
             val textInputLayout = binding.textInputLayoutPassword
             textInputLayout.error = if (!this) getString(R.string.error_password_invalid) else null
             textInputLayout.isErrorEnabled = !this
     }
 
     private fun inject() {
-        (requireActivity() as? RegistrationActivity)
-            ?.activityComponent
-            ?.inject(this)
+        activityComponent?.inject(this)
     }
 }

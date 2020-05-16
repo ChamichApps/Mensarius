@@ -83,7 +83,7 @@ class SignInFragmentTest {
 
         onView(withId(com.google.android.material.R.id.textinput_error)).check(doesNotExist())
 
-        verify(exactly = 1) { mockedViewModel.signIn(any(), any()) }
+        verify(exactly = 1) { mockedViewModel.signIn(VALID_EMAIL, VALID_PASSWORD) }
 
         confirmVerified(mockedViewModel)
     }
