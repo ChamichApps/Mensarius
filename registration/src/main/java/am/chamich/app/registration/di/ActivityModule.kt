@@ -1,8 +1,9 @@
 package am.chamich.app.registration.di
 
-import am.chamich.app.registration.network.Authenticator
+import am.chamich.app.registration.network.FirebaseAuthenticator
 import am.chamich.app.registration.network.api.IAuthenticator
 import android.content.Context
+import com.google.firebase.auth.FirebaseAuth
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
@@ -16,5 +17,6 @@ class ActivityModule(private val context: Context) {
 
     @Singleton
     @Provides
-    fun providesAuthenticator(): IAuthenticator = Authenticator(context)
+    fun providesAuthenticator(): IAuthenticator =
+        FirebaseAuthenticator(context, FirebaseAuth.getInstance())
 }

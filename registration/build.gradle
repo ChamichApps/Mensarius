@@ -49,6 +49,7 @@ dependencies {
     implementation 'com.google.dagger:dagger:2.22'
     implementation 'androidx.navigation:navigation-fragment-ktx:2.2.2'
     implementation 'androidx.navigation:navigation-ui-ktx:2.2.2'
+    implementation 'com.google.firebase:firebase-auth:19.3.1'
 
     kapt 'com.google.dagger:dagger-compiler:2.22'
     kapt "com.android.databinding:compiler:3.6.3"
@@ -68,3 +69,5 @@ dependencies {
 
     kaptAndroidTest "androidx.databinding:databinding-compiler:3.6.3"
 }
+
+apply plugin: 'com.google.gms.google-services'
