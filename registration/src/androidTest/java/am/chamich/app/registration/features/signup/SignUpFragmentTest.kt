@@ -1,4 +1,4 @@
-package am.chamich.app.registration.features.signin
+package am.chamich.app.registration.features.signup
 
 
 import am.chamich.app.registration.Actions
@@ -18,11 +18,11 @@ import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
-class SignInFragmentTest {
+class SignUpFragmentTest {
 
     private val actions = Actions()
     private val matchers = Matchers()
-    private val mockedViewModel: SignInViewModel = mockk(relaxed = true)
+    private val mockedViewModel: SignUpViewModel = mockk(relaxed = true)
 
     @Before
     fun setup() {
@@ -33,14 +33,14 @@ class SignInFragmentTest {
     fun when_ValidEmailProvided_then_ErrorMessageIsDisappearing() {
         actions.enterText(R.id.edit_text_email, INVALID_EMAIL)
         actions.enterText(R.id.edit_text_password, VALID_PASSWORD)
-        actions.perfoemClick(R.id.button_sign_in)
+        actions.perfoemClick(R.id.button_create_account)
 
         matchers.viewIsDisplayedAndContainsText(R.string.error_email_invalid)
 
         actions.enterText(R.id.edit_text_email, VALID_EMAIL)
-        actions.perfoemClick(R.id.button_sign_in)
+        actions.perfoemClick(R.id.button_create_account)
 
-        verify(exactly = 1) { mockedViewModel.signIn(VALID_EMAIL, VALID_PASSWORD) }
+        verify(exactly = 1) { mockedViewModel.signUp(VALID_EMAIL, VALID_PASSWORD) }
 
         confirmVerified()
     }
@@ -49,14 +49,14 @@ class SignInFragmentTest {
     fun when_ValidPasswordProvided_then_ErrorMessageIsDisappearing() {
         actions.enterText(R.id.edit_text_email, VALID_EMAIL)
         actions.enterText(R.id.edit_text_password, INVALID_PASSWORD)
-        actions.perfoemClick(R.id.button_sign_in)
+        actions.perfoemClick(R.id.button_create_account)
 
         matchers.viewIsDisplayedAndContainsText(R.string.error_password_invalid)
 
         actions.enterText(R.id.edit_text_password, VALID_PASSWORD)
-        actions.perfoemClick(R.id.button_sign_in)
+        actions.perfoemClick(R.id.button_create_account)
 
-        verify(exactly = 1) { mockedViewModel.signIn(VALID_EMAIL, VALID_PASSWORD) }
+        verify(exactly = 1) { mockedViewModel.signUp(VALID_EMAIL, VALID_PASSWORD) }
 
         confirmVerified()
     }
@@ -66,20 +66,20 @@ class SignInFragmentTest {
         actions.enterText(R.id.edit_text_email, INVALID_EMAIL)
         actions.enterText(R.id.edit_text_password, INVALID_PASSWORD)
 
-        actions.perfoemClick(R.id.button_sign_in)
+        actions.perfoemClick(R.id.button_create_account)
 
         matchers.viewIsDisplayedAndContainsText(R.string.error_email_invalid)
         matchers.viewIsDisplayedAndContainsText(R.string.error_password_invalid)
 
-        verify(exactly = 0) { mockedViewModel.signIn(any(), any()) }
+        verify(exactly = 0) { mockedViewModel.signUp(any(), any()) }
 
         confirmVerified()
     }
 
-    private fun launchFragment(): FragmentScenario<SignInFragment> {
+    private fun launchFragment(): FragmentScenario<SignUpFragment> {
         return launchFragmentInContainer(factory = object : FragmentFactory() {
             override fun instantiate(classLoader: ClassLoader, className: String): Fragment {
-                return SignInFragment().apply {
+                return SignUpFragment().apply {
                     viewModelFactory = ViewModelFactory(mockedViewModel)
                 }
             }

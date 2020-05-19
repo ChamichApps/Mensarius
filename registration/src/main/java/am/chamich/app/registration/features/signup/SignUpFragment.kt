@@ -40,9 +40,10 @@ class SignUpFragment : CoreFragment() {
     }
 
     fun onSignUpClicked() {
-        if (isEmailInputCorrect(binding.textInputLayoutEmail) &&
-            isPasswordInputCorrect(binding.textInputLayoutPassword)
-        ) {
+        val isValidEmail = isEmailInputCorrect(binding.textInputLayoutEmail)
+        val isValidPassword = isPasswordInputCorrect(binding.textInputLayoutPassword)
+
+        if (isValidEmail && isValidPassword) {
             viewModel.signUp(
                 binding.editTextEmail.textAsString,
                 binding.editTextPassword.textAsString
