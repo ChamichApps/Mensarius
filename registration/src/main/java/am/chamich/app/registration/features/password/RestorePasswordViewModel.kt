@@ -1,5 +1,15 @@
 package am.chamich.app.registration.features.password
 
+import am.chamich.app.registration.network.IAuthenticator
 import androidx.lifecycle.ViewModel
+import javax.inject.Inject
 
-class RestorePasswordViewModel : ViewModel()
+class RestorePasswordViewModel @Inject constructor(
+    private val authenticator: IAuthenticator
+) : ViewModel() {
+
+    fun restorePassword(email: String) {
+
+    }
+
+}
