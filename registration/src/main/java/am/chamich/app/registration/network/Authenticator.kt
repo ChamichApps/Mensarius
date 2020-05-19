@@ -1,5 +1,6 @@
 package am.chamich.app.registration.network
 
+import am.chamich.app.registration.network.api.IAuthenticator
 import android.content.Context
 import android.util.Log
 

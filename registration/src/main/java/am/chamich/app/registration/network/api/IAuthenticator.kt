@@ -1,4 +1,4 @@
-package am.chamich.app.registration.network
+package am.chamich.app.registration.network.api
 
 interface IAuthenticator {
 

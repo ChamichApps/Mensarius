@@ -1,7 +1,7 @@
 package am.chamich.app.registration.di
 
 import am.chamich.app.registration.network.Authenticator
-import am.chamich.app.registration.network.IAuthenticator
+import am.chamich.app.registration.network.api.IAuthenticator
 import android.content.Context
 import dagger.Module
 import dagger.Provides
