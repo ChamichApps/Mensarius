@@ -1,6 +1,7 @@
 package am.chamich.app.registration.di.viewmodel
 
 import am.chamich.app.registration.features.signin.SignInViewModel
+import am.chamich.app.registration.features.signup.SignUpViewModel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import dagger.Binds
@@ -15,5 +16,10 @@ abstract class ViewModelModule {
     @Binds
     @IntoMap
     @ViewModelKey(SignInViewModel::class)
-    abstract fun bindsMoviesViewModel(moviesViewModel: SignInViewModel): ViewModel
+    abstract fun bindsSignInViewModel(signInViewModel: SignInViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(SignUpViewModel::class)
+    abstract fun bindsSignUpViewModel(signUpViewModel: SignUpViewModel): ViewModel
 }

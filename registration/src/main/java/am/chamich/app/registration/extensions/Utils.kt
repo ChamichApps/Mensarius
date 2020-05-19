@@ -1,6 +1,6 @@
 package am.chamich.app.registration.extensions
 
-import com.google.android.material.textfield.TextInputEditText
+import android.widget.EditText
 
-val TextInputEditText.textAsString
+val EditText.textAsString
     get() = this.text.toString()

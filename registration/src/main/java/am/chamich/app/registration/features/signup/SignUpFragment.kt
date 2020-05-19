@@ -1,20 +1,27 @@
 package am.chamich.app.registration.features.signup
 
 import am.chamich.app.registration.R
+import am.chamich.app.registration.core.CoreFragment
 import am.chamich.app.registration.databinding.SignUpFragmentBinding
+import am.chamich.app.registration.extensions.textAsString
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 
-class SignUpFragment : Fragment() {
+class SignUpFragment : CoreFragment() {
 
     private lateinit var binding: SignUpFragmentBinding
     private lateinit var viewModel: SignUpViewModel
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        inject()
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -29,14 +36,25 @@ class SignUpFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(SignUpViewModel::class.java)
+        viewModel = ViewModelProvider(this, viewModelFactory)[SignUpViewModel::class.java]
     }
 
-    fun onCreateAccountClicked(view: View) {
-
+    fun onSignUpClicked() {
+        if (isEmailInputCorrect(binding.textInputLayoutEmail) &&
+            isPasswordInputCorrect(binding.textInputLayoutPassword)
+        ) {
+            viewModel.signUp(
+                binding.editTextEmail.textAsString,
+                binding.editTextPassword.textAsString
+            )
+        }
     }
 
-    fun onSignInClicked(view: View) {
+    fun onSignInClicked() {
         findNavController().navigate(R.id.destination_fragment_sign_in)
+    }
+
+    private fun inject() {
+        activityComponent?.inject(this)
     }
 }
