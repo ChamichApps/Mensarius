@@ -40,6 +40,9 @@ class SignUpFragmentTest {
         actions.enterText(R.id.edit_text_email, VALID_EMAIL)
         actions.perfoemClick(R.id.button_create_account)
 
+        matchers.viewWithTextIsNotDisplayed(R.string.error_email_invalid)
+        matchers.viewWithTextIsNotDisplayed(R.string.error_password_invalid)
+
         verify(exactly = 1) { mockedViewModel.signUp(VALID_EMAIL, VALID_PASSWORD) }
 
         confirmVerified()
@@ -55,6 +58,9 @@ class SignUpFragmentTest {
 
         actions.enterText(R.id.edit_text_password, VALID_PASSWORD)
         actions.perfoemClick(R.id.button_create_account)
+
+        matchers.viewWithTextIsNotDisplayed(R.string.error_email_invalid)
+        matchers.viewWithTextIsNotDisplayed(R.string.error_password_invalid)
 
         verify(exactly = 1) { mockedViewModel.signUp(VALID_EMAIL, VALID_PASSWORD) }
 

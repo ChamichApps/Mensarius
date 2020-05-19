@@ -1,11 +1,8 @@
 package am.chamich.app.registration.features
 
+import am.chamich.app.registration.Actions
+import am.chamich.app.registration.Matchers
 import am.chamich.app.registration.R
-import androidx.test.espresso.Espresso.onView
-import androidx.test.espresso.action.ViewActions.click
-import androidx.test.espresso.assertion.ViewAssertions.matches
-import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
-import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.rule.ActivityTestRule
 import org.junit.Rule
 import org.junit.Test
@@ -14,6 +11,9 @@ import org.junit.Test
  * Test checks that navigation through the flow works.
  */
 class NavigationTest {
+
+    private val actions = Actions()
+    private val matchers = Matchers()
 
     @Rule
     @JvmField
@@ -34,9 +34,9 @@ class NavigationTest {
     fun navigateToRestorePassword() {
         navigateToSignInWithVerification()
 
-        onView(withId(R.id.button_forgot_password)).perform(click())
+        actions.perfoemClick(R.id.button_forgot_password)
 
-        onView(withId(R.id.button_restore_password)).check(matches(isDisplayed()))
+        matchers.viewIsDisplayedAndContainsText(R.string.text_button_restore)
     }
 
     @Test
@@ -46,17 +46,17 @@ class NavigationTest {
     }
 
     private fun navigateToSignUpWithVerification() {
-        onView(withId(R.id.button_sign_up)).perform(click())
+        actions.perfoemClick(R.id.button_sign_up)
 
-        onView(withId(R.id.button_create_account)).check(matches(isDisplayed()))
-        onView(withId(R.id.button_sign_in)).check(matches(isDisplayed()))
+        matchers.viewIsDisplayedAndContainsText(R.string.text_button_create_account)
+        matchers.viewIsDisplayedAndContainsText(R.string.text_have_an_account_sign_in)
     }
 
     private fun navigateToSignInWithVerification() {
-        onView(withId(R.id.button_sign_in)).perform(click())
+        actions.perfoemClick(R.id.button_sign_in)
 
-        onView(withId(R.id.button_sign_in)).check(matches(isDisplayed()))
-        onView(withId(R.id.button_sign_up)).check(matches(isDisplayed()))
-        onView(withId(R.id.button_forgot_password)).check(matches(isDisplayed()))
+        matchers.viewIsDisplayedAndContainsText(R.string.text_button_sign_in)
+        matchers.viewIsDisplayedAndContainsText(R.string.text_dont_have_an_account_sign_up)
+        matchers.viewIsDisplayedAndContainsText(R.string.text_button_forgot_password)
     }
 }
