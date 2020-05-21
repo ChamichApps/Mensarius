@@ -75,6 +75,6 @@ class SignInFragment : CoreFragment() {
 
     private fun handleFailure(failure: Failure?) {
         hideProgress()
-        requireContext().showToast(R.string.error_sign_in_failed)
+        toast = requireContext().createToast(R.string.error_sign_in_failed).apply { show() }
     }
 }

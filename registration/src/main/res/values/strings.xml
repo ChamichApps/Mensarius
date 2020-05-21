@@ -14,4 +14,5 @@
     <string name="error_email_invalid">Email is not valid</string>
     <string name="error_password_invalid">Password is not valid</string>
     <string name="error_sign_in_failed">Sign In failed, please try again</string>
+    <string name="error_sign_up_failed">Sign Up failed, please try again</string>
 </resources>

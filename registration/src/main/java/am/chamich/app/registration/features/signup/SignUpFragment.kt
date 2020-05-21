@@ -3,11 +3,13 @@ package am.chamich.app.registration.features.signup
 import am.chamich.app.registration.R
 import am.chamich.app.registration.core.CoreFragment
 import am.chamich.app.registration.databinding.SignUpFragmentBinding
-import am.chamich.app.registration.extensions.observe
-import am.chamich.app.registration.extensions.textAsString
-import am.chamich.app.registration.extensions.viewModel
+import am.chamich.app.registration.exceptions.Failure
+import am.chamich.app.registration.extensions.*
+import am.chamich.app.registration.features.EXTRA_USER_ID
 import am.chamich.app.registration.model.User
+import android.app.Activity.RESULT_OK
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -28,6 +30,7 @@ class SignUpFragment : CoreFragment() {
         super.onCreate(savedInstanceState)
         signUpViewModel = viewModel(viewModelFactory) {
             observe(signedUpUser, ::handleSignedUpUser)
+            failure(signUpFailure, ::handleFailure)
         }
     }
 
@@ -47,6 +50,7 @@ class SignUpFragment : CoreFragment() {
         val isValidPassword = isPasswordInputCorrect(binding.textInputLayoutPassword)
 
         if (isValidEmail && isValidPassword) {
+            showProgress()
             signUpViewModel.signUp(
                 binding.editTextEmail.textAsString,
                 binding.editTextPassword.textAsString
@@ -59,6 +63,14 @@ class SignUpFragment : CoreFragment() {
     }
 
     private fun handleSignedUpUser(user: User?) {
+        hideProgress()
+        navigator.finishActivityWithResult(RESULT_OK, Intent().apply {
+            putExtra(EXTRA_USER_ID, user?.id)
+        })
+    }
 
+    private fun handleFailure(failure: Failure?) {
+        hideProgress()
+        toast = requireContext().createToast(R.string.error_sign_up_failed).apply { show() }
     }
 }

@@ -94,7 +94,7 @@ class SignInFragmentTest {
     }
 
     @Test
-    fun when_UserEntersValidCredentials_then_ActivityFinishedAndUserDataSetAsResult() {
+    fun when_SignInSuccessful_then_ActivityFinishedAndUserDataSetAsResult() {
         mocks.every { mockedViewModel.signIn(any(), any()) } answers {
             signedInUserLiveData.postValue(mockedUser)
         }
