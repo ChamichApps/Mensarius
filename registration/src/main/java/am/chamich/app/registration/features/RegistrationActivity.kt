@@ -5,9 +5,15 @@ import am.chamich.app.registration.di.ActivityComponent
 import am.chamich.app.registration.di.ActivityModule
 import am.chamich.app.registration.di.DaggerActivityComponent
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
+
+const val EXTRA_USER_ID = "am.chamich.app.registration.EXTRA_USER_ID"
 
 class RegistrationActivity : AppCompatActivity() {
+
+    private lateinit var progressView: View
 
     val activityComponent: ActivityComponent by lazy(mode = LazyThreadSafetyMode.NONE) {
         DaggerActivityComponent
@@ -19,5 +25,16 @@ class RegistrationActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_registration)
+
+        initializeProgressAndDisableClicks()
+    }
+
+    private fun initializeProgressAndDisableClicks() {
+        progressView = findViewById(R.id.layout_progress)
+        progressView.setOnTouchListener { _, _ -> true }
+    }
+
+    fun showProgress(show: Boolean) {
+        progressView.isVisible = show
     }
 }

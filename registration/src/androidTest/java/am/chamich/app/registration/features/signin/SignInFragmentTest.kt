@@ -1,19 +1,20 @@
 package am.chamich.app.registration.features.signin
 
 import am.chamich.app.registration.R
-import am.chamich.app.registration.helpers.Actions
-import am.chamich.app.registration.helpers.Matchers
-import am.chamich.app.registration.helpers.Mocks
-import am.chamich.app.registration.helpers.ViewModelFactory
+import am.chamich.app.registration.exceptions.Failure
+import am.chamich.app.registration.features.EXTRA_USER_ID
+import am.chamich.app.registration.helpers.*
 import am.chamich.app.registration.model.User
 import am.chamich.app.registration.navigation.api.INavigator
 import android.app.Activity.RESULT_OK
+import android.content.Intent
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentFactory
 import androidx.fragment.app.testing.FragmentScenario
 import androidx.fragment.app.testing.launchFragmentInContainer
 import androidx.lifecycle.MutableLiveData
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import org.hamcrest.CoreMatchers.`is`
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -24,13 +25,18 @@ class SignInFragmentTest {
     private val actions = Actions()
     private val matchers = Matchers()
     private val mocks = Mocks()
+    private val assertions = Assertions()
 
     private val signedInUserLiveData = MutableLiveData<User>()
+    private val failureLiveData = MutableLiveData<Failure>()
 
-    private val mockedUser: User = mocks.mock()
+    private val mockedUser: User = mocks.mock {
+        mocks.every { id } returns USER_ID
+    }
     private val mockedNavigator: INavigator = mocks.mock()
     private val mockedViewModel: SignInViewModel = mocks.mock {
         mocks.every { signedInUser } returns signedInUserLiveData
+        mocks.every { signInFailure } returns failureLiveData
     }
 
     @Before
@@ -98,7 +104,26 @@ class SignInFragmentTest {
 
         actions.performClick(R.id.button_sign_in)
 
-        mocks.coVerify(times = 1) { mockedNavigator.finishActivityWithResult(RESULT_OK) }
+        val slot = mocks.slot<Intent>()
+        mocks.coVerify(times = 1) {
+            mockedNavigator.finishActivityWithResult(RESULT_OK, capture(slot))
+        }
+
+        assertions.assertThat(slot.captured.getIntExtra(EXTRA_USER_ID, 0), `is`(USER_ID))
+    }
+
+    @Test
+    fun when_ServerGeneratesError_then_UserInformed() {
+        mocks.every { mockedViewModel.signIn(any(), any()) } answers {
+            failureLiveData.value = Failure.ServerError
+        }
+
+        actions.enterText(R.id.edit_text_email, VALID_EMAIL)
+        actions.enterText(R.id.edit_text_password, VALID_PASSWORD)
+
+        actions.performClick(R.id.button_sign_in)
+
+        matchers.toastWithMessageIsDisplayed(R.string.error_sign_in_failed)
     }
 
     private fun launchFragment(): FragmentScenario<SignInFragment> {
@@ -113,6 +138,7 @@ class SignInFragmentTest {
     }
 
     companion object {
+        const val USER_ID = 83623
         const val INVALID_EMAIL = "chamich.apps@gmail"
         const val VALID_EMAIL = "chamich.apps@gmail.com"
         const val INVALID_PASSWORD = "test"

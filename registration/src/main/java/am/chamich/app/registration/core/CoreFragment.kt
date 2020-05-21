@@ -24,6 +24,14 @@ abstract class CoreFragment : Fragment() {
         (requireActivity() as? RegistrationActivity)?.activityComponent
     }
 
+    protected fun showProgress() {
+        (requireActivity() as? RegistrationActivity)?.showProgress(true)
+    }
+
+    protected fun hideProgress() {
+        (requireActivity() as? RegistrationActivity)?.showProgress(false)
+    }
+
     protected fun isEmailInputCorrect(textInputLayout: TextInputLayout) =
         textInputLayout.editText!!.textAsString.isValidEmail.apply {
             textInputLayout.error = if (!this) getString(R.string.error_email_invalid) else null

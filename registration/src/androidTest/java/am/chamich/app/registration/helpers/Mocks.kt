@@ -5,6 +5,8 @@ class Mocks {
     inline fun <reified T : Any> mock(block: T.() -> Unit = {}): T =
         io.mockk.mockk(relaxed = true, block = block)
 
+    inline fun <reified T : Any> slot() = io.mockk.slot<T>()
+
     fun verify(times: Int = 1, verifyBlock: io.mockk.MockKVerificationScope.() -> Unit) {
         io.mockk.verify(exactly = times) { verifyBlock() }
         io.mockk.confirmVerified()
