@@ -3,24 +3,33 @@ package am.chamich.app.registration.features.signin
 import am.chamich.app.registration.R
 import am.chamich.app.registration.core.CoreFragment
 import am.chamich.app.registration.databinding.SignInFragmentBinding
+import am.chamich.app.registration.extensions.observe
 import am.chamich.app.registration.extensions.textAsString
+import am.chamich.app.registration.extensions.viewModel
+import am.chamich.app.registration.model.User
+import android.app.Activity.RESULT_OK
 import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.findNavController
 
 class SignInFragment : CoreFragment() {
 
     private lateinit var binding: SignInFragmentBinding
-    private lateinit var viewModel: SignInViewModel
+    private lateinit var signInViewModel: SignInViewModel
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        inject()
+        activityComponent?.inject(this)
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        signInViewModel = viewModel(viewModelFactory) {
+            observe(signedInUser, ::handleSignedInUser)
+        }
     }
 
     override fun onCreateView(
@@ -39,7 +48,7 @@ class SignInFragment : CoreFragment() {
         val isValidPassword = isPasswordInputCorrect(binding.textInputLayoutPassword)
 
         if (isValidEmail && isValidPassword) {
-            viewModel.signIn(
+            signInViewModel.signIn(
                 binding.editTextEmail.textAsString,
                 binding.editTextPassword.textAsString
             )
@@ -47,19 +56,14 @@ class SignInFragment : CoreFragment() {
     }
 
     fun onSignUpClicked() {
-        findNavController().navigate(R.id.destination_fragment_sign_up)
+        navigator.navigate(this, R.id.destination_fragment_sign_up)
     }
 
     fun onRestorePasswordClicked() {
-        findNavController().navigate(R.id.destination_fragment_restore_password)
+        navigator.navigate(this, R.id.destination_fragment_restore_password)
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this, viewModelFactory)[SignInViewModel::class.java]
-    }
-
-    private fun inject() {
-        activityComponent?.inject(this)
+    private fun handleSignedInUser(user: User?) {
+        navigator.finishActivityWithResult(RESULT_OK)
     }
 }

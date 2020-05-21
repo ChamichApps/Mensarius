@@ -1,4 +1,4 @@
-package am.chamich.app.registration
+package am.chamich.app.registration.helpers
 
 import androidx.annotation.IdRes
 import androidx.test.espresso.Espresso.onView
@@ -12,7 +12,7 @@ class Actions {
         onView(withId(viewId)).perform(replaceText(text))
     }
 
-    fun perfoemClick(@IdRes viewId: Int) {
+    fun performClick(@IdRes viewId: Int) {
         onView(withId(viewId)).perform(click())
     }
 }

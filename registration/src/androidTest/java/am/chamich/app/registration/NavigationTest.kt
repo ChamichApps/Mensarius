@@ -1,8 +1,8 @@
-package am.chamich.app.registration.features
+package am.chamich.app.registration
 
-import am.chamich.app.registration.Actions
-import am.chamich.app.registration.Matchers
-import am.chamich.app.registration.R
+import am.chamich.app.registration.features.RegistrationActivity
+import am.chamich.app.registration.helpers.Actions
+import am.chamich.app.registration.helpers.Matchers
 import androidx.test.rule.ActivityTestRule
 import org.junit.Rule
 import org.junit.Test
@@ -34,7 +34,7 @@ class NavigationTest {
     fun navigateToRestorePassword() {
         navigateToSignInWithVerification()
 
-        actions.perfoemClick(R.id.button_forgot_password)
+        actions.performClick(R.id.button_forgot_password)
 
         matchers.viewIsDisplayedAndContainsText(R.string.text_button_restore)
     }
@@ -46,14 +46,14 @@ class NavigationTest {
     }
 
     private fun navigateToSignUpWithVerification() {
-        actions.perfoemClick(R.id.button_sign_up)
+        actions.performClick(R.id.button_sign_up)
 
         matchers.viewIsDisplayedAndContainsText(R.string.text_button_create_account)
         matchers.viewIsDisplayedAndContainsText(R.string.text_have_an_account_sign_in)
     }
 
     private fun navigateToSignInWithVerification() {
-        actions.perfoemClick(R.id.button_sign_in)
+        actions.performClick(R.id.button_sign_in)
 
         matchers.viewIsDisplayedAndContainsText(R.string.text_button_sign_in)
         matchers.viewIsDisplayedAndContainsText(R.string.text_dont_have_an_account_sign_up)

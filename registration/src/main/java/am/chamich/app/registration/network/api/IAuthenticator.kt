@@ -1,19 +1,21 @@
 package am.chamich.app.registration.network.api
 
+import am.chamich.app.registration.model.User
+
 interface IAuthenticator {
 
     /**
      * Sign In with provided email and password
      */
-    fun signIn(email: String, password: String)
+    suspend fun signIn(email: String, password: String): User
 
     /**
      * Sign Up with provided email and password
      */
-    fun signUp(email: String, password: String)
+    suspend fun signUp(email: String, password: String): User
 
     /**
      * Restores password for the provided email
      */
-    fun restorePassword(email: String)
+    suspend fun restorePassword(email: String)
 }

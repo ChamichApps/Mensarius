@@ -12,7 +12,7 @@ class RegistrationActivity : AppCompatActivity() {
     val activityComponent: ActivityComponent by lazy(mode = LazyThreadSafetyMode.NONE) {
         DaggerActivityComponent
             .builder()
-            .activityModule(ActivityModule(applicationContext))
+            .activityModule(ActivityModule(applicationContext, this))
             .build()
     }
 

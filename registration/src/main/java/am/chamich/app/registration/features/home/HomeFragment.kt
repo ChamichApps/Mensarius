@@ -34,7 +34,7 @@ class HomeFragment : Fragment() {
         viewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
     }
 
-    fun onSignInClicked(view: View) {
+    fun onSignInClicked() {
         findNavController().navigate(R.id.destination_fragment_sign_in)
     }
 

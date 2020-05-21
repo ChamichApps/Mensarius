@@ -1,4 +1,4 @@
-package am.chamich.app.registration
+package am.chamich.app.registration.helpers
 
 import androidx.annotation.StringRes
 import androidx.test.espresso.Espresso.onView

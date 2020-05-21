@@ -1,4 +1,4 @@
-package am.chamich.app.registration
+package am.chamich.app.registration.helpers
 
 import am.chamich.app.registration.features.password.RestorePasswordViewModel
 import am.chamich.app.registration.features.signin.SignInViewModel

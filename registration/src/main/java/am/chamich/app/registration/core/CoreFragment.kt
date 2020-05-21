@@ -6,6 +6,7 @@ import am.chamich.app.registration.extensions.isValidEmail
 import am.chamich.app.registration.extensions.isValidPassword
 import am.chamich.app.registration.extensions.textAsString
 import am.chamich.app.registration.features.RegistrationActivity
+import am.chamich.app.registration.navigation.api.INavigator
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.textfield.TextInputLayout
@@ -15,6 +16,9 @@ abstract class CoreFragment : Fragment() {
 
     @Inject
     internal lateinit var viewModelFactory: ViewModelProvider.Factory
+
+    @Inject
+    internal lateinit var navigator: INavigator
 
     protected val activityComponent: ActivityComponent? by lazy(mode = LazyThreadSafetyMode.NONE) {
         (requireActivity() as? RegistrationActivity)?.activityComponent
