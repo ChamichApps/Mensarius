@@ -6,7 +6,7 @@ import am.chamich.app.registration.exceptions.Failure
 import am.chamich.app.registration.features.EXTRA_USER_ID
 import am.chamich.app.registration.features.RESULT_SIGN_UP_SUCCESS
 import am.chamich.app.registration.helpers.*
-import am.chamich.app.registration.model.User
+import am.chamich.app.registration.model.api.IUser
 import am.chamich.app.registration.navigation.api.INavigator
 import android.content.Intent
 import androidx.fragment.app.Fragment
@@ -28,10 +28,10 @@ class SignUpFragmentTest {
     private val mocks = Mocks()
     private val assertions = Assertions()
 
-    private val signedUpUserLiveData = MutableLiveData<User>()
+    private val signedUpUserLiveData = MutableLiveData<IUser>()
     private val failureLiveData = MutableLiveData<Failure>()
 
-    private val mockedUser: User = mocks.mock {
+    private val mockedUser: IUser = mocks.mock {
         mocks.every { id } returns USER_ID
     }
     private val mockedNavigator: INavigator = mocks.mock()

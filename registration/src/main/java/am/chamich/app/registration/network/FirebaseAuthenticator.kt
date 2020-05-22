@@ -1,6 +1,7 @@
 package am.chamich.app.registration.network
 
 import am.chamich.app.registration.model.User
+import am.chamich.app.registration.model.api.IUser
 import am.chamich.app.registration.network.api.IAuthenticator
 import android.content.Context
 import android.util.Log
@@ -11,7 +12,7 @@ class FirebaseAuthenticator(
     private val authenticator: FirebaseAuth
 ) : IAuthenticator {
 
-    override suspend fun signIn(email: String, password: String): User {
+    override suspend fun signIn(email: String, password: String): IUser {
         Log.d(TAG, "------------------------| Sign In |------------------------")
         authenticator.signInWithEmailAndPassword(email, password)
             .addOnSuccessListener {
@@ -24,7 +25,7 @@ class FirebaseAuthenticator(
         return User(1)
     }
 
-    override suspend fun signUp(email: String, password: String): User {
+    override suspend fun signUp(email: String, password: String): IUser {
         Log.d(TAG, "------------------------| Sign Up |------------------------")
         authenticator.createUserWithEmailAndPassword(email, password)
             .addOnSuccessListener {

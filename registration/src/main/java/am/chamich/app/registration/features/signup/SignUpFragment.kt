@@ -7,7 +7,7 @@ import am.chamich.app.registration.exceptions.Failure
 import am.chamich.app.registration.extensions.*
 import am.chamich.app.registration.features.EXTRA_USER_ID
 import am.chamich.app.registration.features.RESULT_SIGN_UP_SUCCESS
-import am.chamich.app.registration.model.User
+import am.chamich.app.registration.model.api.IUser
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -62,7 +62,7 @@ class SignUpFragment : CoreFragment() {
         navigator.navigate(this, R.id.destination_fragment_sign_in)
     }
 
-    private fun handleSignUpSuccess(user: User?) {
+    private fun handleSignUpSuccess(user: IUser?) {
         hideProgress()
         navigator.finishActivityWithResult(RESULT_SIGN_UP_SUCCESS, Intent().apply {
             putExtra(EXTRA_USER_ID, user?.id)

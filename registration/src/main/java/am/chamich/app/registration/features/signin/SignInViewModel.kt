@@ -2,7 +2,7 @@ package am.chamich.app.registration.features.signin
 
 import am.chamich.app.registration.core.CoreViewModel
 import am.chamich.app.registration.exceptions.Failure
-import am.chamich.app.registration.model.User
+import am.chamich.app.registration.model.api.IUser
 import am.chamich.app.registration.network.api.IAuthenticator
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -16,19 +16,21 @@ class SignInViewModel @Inject constructor(
     private val authenticator: IAuthenticator
 ) : CoreViewModel() {
 
-    private val user: MutableLiveData<User> = MutableLiveData()
-    val signedInUser: LiveData<User>
+    private val user: MutableLiveData<IUser> = MutableLiveData()
+    val signedInUser: LiveData<IUser>
         get() = user
     val signInFailure: LiveData<Failure>
         get() = failure
 
     fun signIn(email: String, password: String) {
-        var result: User? = null
         viewModelScope.launch {
             withContext(Dispatchers.IO) {
-                result = authenticator.signIn(email, password)
+                try {
+                    user.value = authenticator.signIn(email, password)
+                } catch (e: Failure) {
+                    failure.value = e
+                }
             }
-            user.value = result
         }
     }
 }
