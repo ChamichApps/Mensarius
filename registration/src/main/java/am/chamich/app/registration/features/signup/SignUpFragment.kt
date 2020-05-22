@@ -6,8 +6,8 @@ import am.chamich.app.registration.databinding.SignUpFragmentBinding
 import am.chamich.app.registration.exceptions.Failure
 import am.chamich.app.registration.extensions.*
 import am.chamich.app.registration.features.EXTRA_USER_ID
+import am.chamich.app.registration.features.RESULT_SIGN_UP_SUCCESS
 import am.chamich.app.registration.model.User
-import android.app.Activity.RESULT_OK
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -29,8 +29,8 @@ class SignUpFragment : CoreFragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         signUpViewModel = viewModel(viewModelFactory) {
-            observe(signedUpUser, ::handleSignedUpUser)
-            failure(signUpFailure, ::handleFailure)
+            observe(signedUpUser, ::handleSignUpSuccess)
+            failure(signUpFailure, ::handleSignUpFailure)
         }
     }
 
@@ -62,14 +62,14 @@ class SignUpFragment : CoreFragment() {
         navigator.navigate(this, R.id.destination_fragment_sign_in)
     }
 
-    private fun handleSignedUpUser(user: User?) {
+    private fun handleSignUpSuccess(user: User?) {
         hideProgress()
-        navigator.finishActivityWithResult(RESULT_OK, Intent().apply {
+        navigator.finishActivityWithResult(RESULT_SIGN_UP_SUCCESS, Intent().apply {
             putExtra(EXTRA_USER_ID, user?.id)
         })
     }
 
-    private fun handleFailure(failure: Failure?) {
+    private fun handleSignUpFailure(failure: Failure?) {
         hideProgress()
         toast = requireContext().createToast(R.string.error_sign_up_failed).apply { show() }
     }

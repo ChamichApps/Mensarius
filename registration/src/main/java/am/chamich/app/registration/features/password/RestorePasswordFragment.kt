@@ -19,7 +19,7 @@ class RestorePasswordFragment : CoreFragment() {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        inject()
+        activityComponent?.inject(this)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -46,7 +46,7 @@ class RestorePasswordFragment : CoreFragment() {
         }
     }
 
-    private fun inject() {
-        activityComponent?.inject(this)
+    private fun handlePasswordRestoredSuccess() {
+
     }
 }

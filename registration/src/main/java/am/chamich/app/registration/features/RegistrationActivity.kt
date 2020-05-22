@@ -9,6 +9,8 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 
+const val RESULT_SIGN_UP_SUCCESS = 10000
+const val RESULT_SIGN_IN_SUCCESS = 10001
 const val EXTRA_USER_ID = "am.chamich.app.registration.EXTRA_USER_ID"
 
 class RegistrationActivity : AppCompatActivity() {

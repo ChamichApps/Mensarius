@@ -3,10 +3,10 @@ package am.chamich.app.registration.features.signin
 import am.chamich.app.registration.R
 import am.chamich.app.registration.exceptions.Failure
 import am.chamich.app.registration.features.EXTRA_USER_ID
+import am.chamich.app.registration.features.RESULT_SIGN_IN_SUCCESS
 import am.chamich.app.registration.helpers.*
 import am.chamich.app.registration.model.User
 import am.chamich.app.registration.navigation.api.INavigator
-import android.app.Activity.RESULT_OK
 import android.content.Intent
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentFactory
@@ -106,7 +106,7 @@ class SignInFragmentTest {
 
         val slot = mocks.slot<Intent>()
         mocks.coVerify(times = 1) {
-            mockedNavigator.finishActivityWithResult(RESULT_OK, capture(slot))
+            mockedNavigator.finishActivityWithResult(RESULT_SIGN_IN_SUCCESS, capture(slot))
         }
 
         assertions.assertThat(slot.captured.getIntExtra(EXTRA_USER_ID, 0), `is`(USER_ID))
