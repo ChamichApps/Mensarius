@@ -44,6 +44,7 @@ class SignInFragmentTest {
         launchFragment()
 
         mocks.verify(times = 1) { mockedViewModel.signedInUser }
+        mocks.verify(times = 1) { mockedViewModel.signInFailure }
     }
 
     @Test

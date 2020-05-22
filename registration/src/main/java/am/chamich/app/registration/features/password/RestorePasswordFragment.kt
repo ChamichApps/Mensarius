@@ -3,6 +3,9 @@ package am.chamich.app.registration.features.password
 import am.chamich.app.registration.R
 import am.chamich.app.registration.core.CoreFragment
 import am.chamich.app.registration.databinding.RestorePasswordFragmentBinding
+import am.chamich.app.registration.exceptions.Failure
+import am.chamich.app.registration.extensions.createToast
+import am.chamich.app.registration.extensions.observe
 import am.chamich.app.registration.extensions.textAsString
 import am.chamich.app.registration.extensions.viewModel
 import android.content.Context
@@ -25,7 +28,8 @@ class RestorePasswordFragment : CoreFragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         restorePasswordViewModel = viewModel(viewModelFactory) {
-
+            observe(passwordSendEmail, ::handlePasswordRestoreSuccess)
+            observe(passwordSendFailure, ::handlePasswordRestoreFailure)
         }
     }
 
@@ -46,7 +50,12 @@ class RestorePasswordFragment : CoreFragment() {
         }
     }
 
-    private fun handlePasswordRestoredSuccess() {
+    private fun handlePasswordRestoreSuccess(email: String?) {
+        toast =
+            requireContext().createToast(R.string.text_password_restore_success).apply { show() }
+    }
 
+    private fun handlePasswordRestoreFailure(failure: Failure?) {
+        toast = requireContext().createToast(R.string.error_password_restore).apply { show() }
     }
 }
