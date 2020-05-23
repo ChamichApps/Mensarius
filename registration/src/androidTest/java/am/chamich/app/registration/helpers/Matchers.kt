@@ -2,18 +2,22 @@ package am.chamich.app.registration.helpers
 
 import android.os.IBinder
 import android.view.WindowManager
+import androidx.annotation.IdRes
 import androidx.annotation.StringRes
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.Root
 import androidx.test.espresso.assertion.ViewAssertions.doesNotExist
 import androidx.test.espresso.assertion.ViewAssertions.matches
-import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
-import androidx.test.espresso.matcher.ViewMatchers.withText
+import androidx.test.espresso.matcher.ViewMatchers.*
 import org.hamcrest.Description
 import org.hamcrest.TypeSafeMatcher
 
 
 class Matchers {
+
+    fun viewWithIdIsDisplayed(@IdRes resourceId: Int) {
+        onView(withId(resourceId)).check(matches(isDisplayed()))
+    }
 
     fun viewIsDisplayedAndContainsText(@StringRes stringResource: Int) {
         onView(withText(stringResource)).check(matches(isDisplayed()))

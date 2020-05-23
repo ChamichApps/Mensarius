@@ -10,7 +10,7 @@ import org.junit.Test
 /**
  * Test checks that navigation through the flow works.
  */
-class NavigationTest {
+class IntegrationTest {
 
     private val actions = Actions()
     private val matchers = Matchers()
@@ -36,7 +36,7 @@ class NavigationTest {
 
         actions.performClick(R.id.button_forgot_password)
 
-        matchers.viewIsDisplayedAndContainsText(R.string.text_button_restore)
+        matchers.viewWithIdIsDisplayed(R.id.button_restore_password)
     }
 
     @Test
@@ -48,14 +48,14 @@ class NavigationTest {
     private fun navigateToSignUpWithVerification() {
         actions.performClick(R.id.button_sign_up)
 
-        matchers.viewIsDisplayedAndContainsText(R.string.text_button_create_account)
+        matchers.viewWithIdIsDisplayed(R.id.button_create_account)
         matchers.viewIsDisplayedAndContainsText(R.string.text_have_an_account_sign_in)
     }
 
     private fun navigateToSignInWithVerification() {
         actions.performClick(R.id.button_sign_in)
 
-        matchers.viewIsDisplayedAndContainsText(R.string.text_button_sign_in)
+        matchers.viewWithIdIsDisplayed(R.id.button_sign_in)
         matchers.viewIsDisplayedAndContainsText(R.string.text_dont_have_an_account_sign_up)
         matchers.viewIsDisplayedAndContainsText(R.string.text_button_forgot_password)
     }
