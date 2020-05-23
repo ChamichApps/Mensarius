@@ -2,7 +2,9 @@ package am.chamich.app.registration.features.signin
 
 import am.chamich.app.registration.R
 import am.chamich.app.registration.exceptions.Failure
+import am.chamich.app.registration.features.EXTRA_USER_EMAIL
 import am.chamich.app.registration.features.EXTRA_USER_ID
+import am.chamich.app.registration.features.EXTRA_USER_NAME
 import am.chamich.app.registration.features.RESULT_SIGN_IN_SUCCESS
 import am.chamich.app.registration.helpers.*
 import am.chamich.app.registration.model.api.IUser
@@ -32,6 +34,8 @@ class SignInFragmentTest {
 
     private val mockedUser: IUser = mocks.mock {
         mocks.every { id } returns USER_ID
+        mocks.every { email } returns VALID_EMAIL
+        mocks.every { name } returns USER_NAME
     }
     private val mockedNavigator: INavigator = mocks.mock()
     private val mockedViewModel: SignInViewModel = mocks.mock {
@@ -110,7 +114,9 @@ class SignInFragmentTest {
             mockedNavigator.finishActivityWithResult(RESULT_SIGN_IN_SUCCESS, capture(slot))
         }
 
-        assertions.assertThat(slot.captured.getIntExtra(EXTRA_USER_ID, 0), `is`(USER_ID))
+        assertions.assertThat(slot.captured.getStringExtra(EXTRA_USER_ID), `is`(USER_ID))
+        assertions.assertThat(slot.captured.getStringExtra(EXTRA_USER_EMAIL), `is`(VALID_EMAIL))
+        assertions.assertThat(slot.captured.getStringExtra(EXTRA_USER_NAME), `is`(USER_NAME))
     }
 
     @Test
@@ -139,10 +145,11 @@ class SignInFragmentTest {
     }
 
     companion object {
-        const val USER_ID = 83623
+        const val USER_ID = "0125151b-40ea-4ba6-972c-2400cca9fcb1"
         const val INVALID_EMAIL = "chamich.apps@gmail"
         const val VALID_EMAIL = "chamich.apps@gmail.com"
         const val INVALID_PASSWORD = "test"
         const val VALID_PASSWORD = "Test1234!"
+        const val USER_NAME = "Chamich Apps"
     }
 }

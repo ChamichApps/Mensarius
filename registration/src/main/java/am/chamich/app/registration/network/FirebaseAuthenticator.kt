@@ -1,12 +1,14 @@
 package am.chamich.app.registration.network
 
 import am.chamich.app.registration.exceptions.Failure
+import am.chamich.app.registration.model.UnknownUser
 import am.chamich.app.registration.model.User
 import am.chamich.app.registration.model.api.IUser
 import am.chamich.app.registration.network.api.IAuthenticator
 import android.content.Context
 import android.util.Log
 import com.google.firebase.auth.FirebaseAuth
+import kotlinx.coroutines.tasks.await
 
 class FirebaseAuthenticator(
     private val context: Context,
@@ -16,44 +18,44 @@ class FirebaseAuthenticator(
     @Throws(Failure.SignInException::class)
     override suspend fun signIn(email: String, password: String): IUser {
         Log.d(TAG, "------------------------| Sign In |------------------------")
-        authenticator.signInWithEmailAndPassword(email, password)
-            .addOnSuccessListener {
-                Log.d(TAG, "Sign In Successful for [$email]")
+        try {
+            val data = authenticator.signInWithEmailAndPassword(email, password).await()
+            val user = data.user
+            return if (user != null) {
+                User(user.uid, user.email, user.displayName)
+            } else {
+                UnknownUser()
             }
-            .addOnFailureListener { exception ->
-                Log.e(TAG, "Sign In Failed for [$email]", exception)
-                throw Failure.SignInException(exception.localizedMessage)
-            }
-
-        return User(1)
+        } catch (exception: Exception) {
+            throw Failure.SignInException(exception.localizedMessage)
+        }
     }
 
     @Throws(Failure.SignUpException::class)
     override suspend fun signUp(email: String, password: String): IUser {
         Log.d(TAG, "------------------------| Sign Up |------------------------")
-        authenticator.createUserWithEmailAndPassword(email, password)
-            .addOnSuccessListener {
-                Log.d(TAG, "Sign Up Successful for [$email]")
+        try {
+            val data = authenticator.createUserWithEmailAndPassword(email, password).await()
+            val user = data.user
+            return if (user != null) {
+                return User(user.uid, user.email, user.displayName)
+            } else {
+                UnknownUser()
             }
-            .addOnFailureListener { exception ->
-                Log.e(TAG, "Sign Up Failed for [$email]", exception)
-            }
-
-        return User(2)
+        } catch (exception: Exception) {
+            throw Failure.SignUpException(exception.message)
+        }
     }
 
     @Throws(Failure.PasswordRecoveryException::class)
     override suspend fun restorePassword(email: String): String {
         Log.d(TAG, "--------------------| Restore Password |-------------------")
-        authenticator.sendPasswordResetEmail(email)
-            .addOnSuccessListener {
-                Log.d(TAG, "Password Reset Successful for [$email]")
-            }
-            .addOnFailureListener {
-                Log.e(TAG, "Password Reset Failed for [$email]")
-            }
-
-        return ""
+        try {
+            authenticator.sendPasswordResetEmail(email).await()
+            return email
+        } catch (exception: Exception) {
+            throw Failure.PasswordRecoveryException(exception.localizedMessage)
+        }
     }
 
     companion object {

@@ -5,7 +5,9 @@ import am.chamich.app.registration.core.CoreFragment
 import am.chamich.app.registration.databinding.FragmentSignInBinding
 import am.chamich.app.registration.exceptions.Failure
 import am.chamich.app.registration.extensions.*
+import am.chamich.app.registration.features.EXTRA_USER_EMAIL
 import am.chamich.app.registration.features.EXTRA_USER_ID
+import am.chamich.app.registration.features.EXTRA_USER_NAME
 import am.chamich.app.registration.features.RESULT_SIGN_IN_SUCCESS
 import am.chamich.app.registration.model.api.IUser
 import android.content.Context
@@ -70,6 +72,8 @@ class SignInFragment : CoreFragment() {
         hideProgress()
         navigator.finishActivityWithResult(RESULT_SIGN_IN_SUCCESS, Intent().apply {
             putExtra(EXTRA_USER_ID, user?.id)
+            putExtra(EXTRA_USER_EMAIL, user?.email)
+            putExtra(EXTRA_USER_NAME, user?.name)
         })
     }
 

@@ -66,7 +66,7 @@ class SignInViewModelTest {
     private companion object {
         const val EMAIL = "chamich.apps@gmail.com"
         const val PASSWORD = "Test123456!"
-        val USER = User(1)
+        val USER = User("9cfb4401-2eb8-43c3-8adf-4c153dc97c4d")
         val EXCEPTION = Failure.SignInException("User with email $EMAIL does not exists")
     }
 }
