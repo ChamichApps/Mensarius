@@ -25,9 +25,9 @@ class RestorePasswordViewModel @Inject constructor(
         viewModelScope.launch {
             withContext(Dispatchers.IO) {
                 try {
-                    success.value = authenticator.restorePassword(email)
+                    success.postValue(authenticator.restorePassword(email))
                 } catch (e: Failure.PasswordRecoveryException) {
-                    failure.value = e
+                    failure.postValue(e)
                 }
             }
         }

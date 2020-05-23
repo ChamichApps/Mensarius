@@ -64,9 +64,10 @@ class SignUpViewModelTest {
     }
 
     private companion object {
+        const val USER_NAME = "Chamich Apps"
         const val EMAIL = "chamich.apps@gmail.com"
         const val PASSWORD = "Test123456!"
-        val USER = User("9cfb4401-2eb8-43c3-8adf-4c153dc97c4d")
+        val USER = User("9cfb4401-2eb8-43c3-8adf-4c153dc97c4d", EMAIL, USER_NAME)
         val EXCEPTION = Failure.SignUpException("Unable to Sign Up, please try again")
     }
 }

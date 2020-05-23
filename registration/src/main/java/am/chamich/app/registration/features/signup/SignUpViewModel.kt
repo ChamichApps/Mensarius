@@ -26,9 +26,9 @@ class SignUpViewModel @Inject constructor(
         viewModelScope.launch {
             withContext(Dispatchers.IO) {
                 try {
-                    success.value = authenticator.signUp(email, password)
+                    success.postValue(authenticator.signUp(email, password))
                 } catch (e: Failure.SignUpException) {
-                    failure.value = e
+                    failure.postValue(e)
                 }
             }
         }

@@ -26,9 +26,9 @@ class SignInViewModel @Inject constructor(
         viewModelScope.launch {
             withContext(Dispatchers.IO) {
                 try {
-                    success.value = authenticator.signIn(email, password)
+                    success.postValue(authenticator.signIn(email, password))
                 } catch (e: Failure.SignInException) {
-                    failure.value = e
+                    failure.postValue(e)
                 }
             }
         }
