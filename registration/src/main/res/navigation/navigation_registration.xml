@@ -3,12 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation_registration"
-    app:startDestination="@id/homeFragment">
+    app:startDestination="@id/destination_fragment_home">
 
     <fragment
-        android:id="@+id/homeFragment"
+        android:id="@+id/destination_fragment_home"
         android:name="am.chamich.app.registration.features.home.HomeFragment"
-        android:label="fragment_home"
+        android:label="@string/text_label_registration"
         tools:layout="@layout/fragment_home">
         <action
             android:id="@+id/action_homeFragment_to_signInFragment"
@@ -17,7 +17,7 @@
     <fragment
         android:id="@+id/destination_fragment_sign_in"
         android:name="am.chamich.app.registration.features.signin.SignInFragment"
-        android:label="SignInFragment"
+        android:label="@string/text_label_sign_in"
         tools:layout="@layout/fragment_sign_in">
         <action
             android:id="@+id/action_signInFragment_to_restorePasswordFragment"
@@ -29,11 +29,11 @@
     <fragment
         android:id="@+id/destination_fragment_restore_password"
         android:name="am.chamich.app.registration.features.password.RestorePasswordFragment"
-        android:label="RestorePasswordFragment"
+        android:label="@string/text_label_restore_password"
         tools:layout="@layout/fragment_restore_password" />
     <fragment
         android:id="@+id/destination_fragment_sign_up"
         android:name="am.chamich.app.registration.features.signup.SignUpFragment"
-        android:label="SignUpFragment"
+        android:label="@string/text_label_sign_up"
         tools:layout="@layout/fragment_sign_up" />
 </navigation>

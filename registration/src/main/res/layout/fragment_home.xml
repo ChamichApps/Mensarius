@@ -16,7 +16,7 @@
         android:layout_height="match_parent"
         tools:context=".features.home.HomeFragment">
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/button_sign_in"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -25,6 +25,7 @@
             android:layout_marginBottom="8dp"
             android:onClick="@{()-> fragment.onSignInClicked()}"
             android:text="@string/text_have_an_account_sign_in"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />

@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="am.chamich.app.registration">
 
-    <application android:theme="@style/Platform.MaterialComponents.Light">
+    <application android:theme="@style/Theme.MaterialComponents.Light.NoActionBar">
         <activity android:name=".features.RegistrationActivity" />
     </application>
 
