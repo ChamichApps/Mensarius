@@ -16,9 +16,9 @@ class SignInViewModel @Inject constructor(
     private val authenticator: IAuthenticator
 ) : CoreViewModel() {
 
-    private val user: MutableLiveData<IUser> = MutableLiveData()
+    private val success: MutableLiveData<IUser> = MutableLiveData()
     val signedInUser: LiveData<IUser>
-        get() = user
+        get() = success
     val signInFailure: LiveData<Failure>
         get() = failure
 
@@ -26,8 +26,8 @@ class SignInViewModel @Inject constructor(
         viewModelScope.launch {
             withContext(Dispatchers.IO) {
                 try {
-                    user.value = authenticator.signIn(email, password)
-                } catch (e: Failure) {
+                    success.value = authenticator.signIn(email, password)
+                } catch (e: Failure.SignInException) {
                     failure.value = e
                 }
             }

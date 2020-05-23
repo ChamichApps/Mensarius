@@ -117,7 +117,7 @@ class SignUpFragmentTest {
     @Test
     fun when_ServerGeneratesError_then_UserInformed() {
         mocks.every { mockedViewModel.signUp(any(), any()) } answers {
-            failureLiveData.value = Failure.ServerError
+            failureLiveData.value = Failure.SignUpException("Sign Up Failed")
         }
 
         actions.enterText(R.id.edit_text_email, VALID_EMAIL)

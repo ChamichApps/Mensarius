@@ -1,4 +1,4 @@
-package am.chamich.app.registration.features.signin
+package am.chamich.app.registration.features.signup
 
 import am.chamich.app.registration.exceptions.Failure
 import am.chamich.app.registration.helpers.TestCoroutineRule
@@ -18,7 +18,7 @@ import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
 
 @RunWith(JUnit4::class)
-class SignInViewModelTest {
+class SignUpViewModelTest {
 
     @get:Rule
     val testInstantTaskExecutorRule: TestRule = InstantTaskExecutorRule()
@@ -27,46 +27,46 @@ class SignInViewModelTest {
     val testCoroutineRule = TestCoroutineRule()
 
     private val authenticator: IAuthenticator = mockk()
-    private val viewModel: SignInViewModel = SignInViewModel(authenticator)
+    private val viewModel: SignUpViewModel = SignUpViewModel(authenticator)
 
     @ExperimentalCoroutinesApi
     @Test
-    fun when_SignInSucceed_then_UserDataReturned() {
+    fun when_SignUpSucceed_then_UserDataReturned() {
         val observer: Observer<IUser> = mockk()
         testCoroutineRule.runBlockingTest {
-            coEvery { authenticator.signIn(any(), any()) } returns USER
+            coEvery { authenticator.signUp(any(), any()) } returns USER
 
-            viewModel.signedInUser.observeForever(observer)
-            viewModel.signIn(EMAIL, PASSWORD)
+            viewModel.signedUpUser.observeForever(observer)
+            viewModel.signUp(EMAIL, PASSWORD)
 
-            coVerify(exactly = 1) { authenticator.signIn(EMAIL, PASSWORD) }
+            coVerify(exactly = 1) { authenticator.signUp(EMAIL, PASSWORD) }
             coVerify(exactly = 1) { observer.onChanged(USER) }
 
-            viewModel.signedInUser.removeObserver(observer)
+            viewModel.signedUpUser.removeObserver(observer)
         }
     }
 
     @ExperimentalCoroutinesApi
     @Test
-    fun when_SignInFailed_then_FailureReturned() {
+    fun when_SignUpFailed_then_FailureReturned() {
         val observer: Observer<Failure> = mockk()
         testCoroutineRule.runBlockingTest {
-            coEvery { authenticator.signIn(any(), any()) } throws EXCEPTION
+            coEvery { authenticator.signUp(any(), any()) } throws EXCEPTION
 
-            viewModel.signInFailure.observeForever(observer)
-            viewModel.signIn(EMAIL, PASSWORD)
+            viewModel.signUpFailure.observeForever(observer)
+            viewModel.signUp(EMAIL, PASSWORD)
 
-            coVerify(exactly = 1) { authenticator.signIn(any(), any()) }
+            coVerify(exactly = 1) { authenticator.signUp(any(), any()) }
             coVerify(exactly = 1) { observer.onChanged(EXCEPTION) }
 
-            viewModel.signInFailure.removeObserver(observer)
+            viewModel.signUpFailure.removeObserver(observer)
         }
     }
 
     private companion object {
         const val EMAIL = "chamich.apps@gmail.com"
         const val PASSWORD = "Test123456!"
-        val USER = User(1)
-        val EXCEPTION = Failure.SignInException("User with email $EMAIL does not exists")
+        val USER = User(4)
+        val EXCEPTION = Failure.SignUpException("Unable to Sign Up, please try again")
     }
 }

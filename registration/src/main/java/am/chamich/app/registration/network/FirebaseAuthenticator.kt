@@ -1,5 +1,6 @@
 package am.chamich.app.registration.network
 
+import am.chamich.app.registration.exceptions.Failure
 import am.chamich.app.registration.model.User
 import am.chamich.app.registration.model.api.IUser
 import am.chamich.app.registration.network.api.IAuthenticator
@@ -12,6 +13,7 @@ class FirebaseAuthenticator(
     private val authenticator: FirebaseAuth
 ) : IAuthenticator {
 
+    @Throws(Failure.SignInException::class)
     override suspend fun signIn(email: String, password: String): IUser {
         Log.d(TAG, "------------------------| Sign In |------------------------")
         authenticator.signInWithEmailAndPassword(email, password)
@@ -20,11 +22,13 @@ class FirebaseAuthenticator(
             }
             .addOnFailureListener { exception ->
                 Log.e(TAG, "Sign In Failed for [$email]", exception)
+                throw Failure.SignInException(exception.localizedMessage)
             }
 
         return User(1)
     }
 
+    @Throws(Failure.SignUpException::class)
     override suspend fun signUp(email: String, password: String): IUser {
         Log.d(TAG, "------------------------| Sign Up |------------------------")
         authenticator.createUserWithEmailAndPassword(email, password)
@@ -38,7 +42,8 @@ class FirebaseAuthenticator(
         return User(2)
     }
 
-    override suspend fun restorePassword(email: String) {
+    @Throws(Failure.PasswordRecoveryException::class)
+    override suspend fun restorePassword(email: String): String {
         Log.d(TAG, "--------------------| Restore Password |-------------------")
         authenticator.sendPasswordResetEmail(email)
             .addOnSuccessListener {
@@ -47,6 +52,8 @@ class FirebaseAuthenticator(
             .addOnFailureListener {
                 Log.e(TAG, "Password Reset Failed for [$email]")
             }
+
+        return ""
     }
 
     companion object {

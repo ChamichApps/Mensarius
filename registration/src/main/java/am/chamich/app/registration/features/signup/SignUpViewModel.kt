@@ -6,19 +6,31 @@ import am.chamich.app.registration.model.api.IUser
 import am.chamich.app.registration.network.api.IAuthenticator
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 class SignUpViewModel @Inject constructor(
     private val authenticator: IAuthenticator
 ) : CoreViewModel() {
 
-    private val user: MutableLiveData<IUser> = MutableLiveData()
+    private val success: MutableLiveData<IUser> = MutableLiveData()
     val signedUpUser: LiveData<IUser>
-        get() = user
+        get() = success
     val signUpFailure: LiveData<Failure>
         get() = failure
 
     fun signUp(email: String, password: String) {
-        // authenticator.signUp(email, password)
+        viewModelScope.launch {
+            withContext(Dispatchers.IO) {
+                try {
+                    success.value = authenticator.signUp(email, password)
+                } catch (e: Failure.SignUpException) {
+                    failure.value = e
+                }
+            }
+        }
     }
 }

@@ -116,7 +116,7 @@ class SignInFragmentTest {
     @Test
     fun when_ServerGeneratesError_then_UserInformed() {
         mocks.every { mockedViewModel.signIn(any(), any()) } answers {
-            failureLiveData.value = Failure.ServerError
+            failureLiveData.value = Failure.SignInException("User does not exists.")
         }
 
         actions.enterText(R.id.edit_text_email, VALID_EMAIL)

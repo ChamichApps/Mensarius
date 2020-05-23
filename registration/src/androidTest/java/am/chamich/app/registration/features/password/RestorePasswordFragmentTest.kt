@@ -66,7 +66,9 @@ class RestorePasswordFragmentTest {
     @Test
     fun when_PasswordRestoreEmailSendFailed_then_UserInformed() {
         mocks.every { mockedViewModel.restorePassword(any()) } answers {
-            failureLiveData.postValue(Failure.ServerError)
+            failureLiveData.postValue(
+                Failure.PasswordRecoveryException("Provided email address does not exists")
+            )
         }
 
         actions.enterText(R.id.edit_text_email, VALID_EMAIL)

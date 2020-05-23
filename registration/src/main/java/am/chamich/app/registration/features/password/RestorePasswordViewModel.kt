@@ -5,20 +5,32 @@ import am.chamich.app.registration.exceptions.Failure
 import am.chamich.app.registration.network.api.IAuthenticator
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 class RestorePasswordViewModel @Inject constructor(
     private val authenticator: IAuthenticator
 ) : CoreViewModel() {
 
-    private val email: MutableLiveData<String> = MutableLiveData()
+    private val success: MutableLiveData<String> = MutableLiveData()
     val passwordSendEmail: LiveData<String>
-        get() = email
+        get() = success
     val passwordSendFailure: LiveData<Failure>
         get() = failure
 
     fun restorePassword(email: String) {
-
+        viewModelScope.launch {
+            withContext(Dispatchers.IO) {
+                try {
+                    success.value = authenticator.restorePassword(email)
+                } catch (e: Failure.PasswordRecoveryException) {
+                    failure.value = e
+                }
+            }
+        }
     }
 
 }
