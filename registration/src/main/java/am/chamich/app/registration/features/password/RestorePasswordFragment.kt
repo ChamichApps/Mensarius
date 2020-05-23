@@ -2,7 +2,7 @@ package am.chamich.app.registration.features.password
 
 import am.chamich.app.registration.R
 import am.chamich.app.registration.core.CoreFragment
-import am.chamich.app.registration.databinding.RestorePasswordFragmentBinding
+import am.chamich.app.registration.databinding.FragmentRestorePasswordBinding
 import am.chamich.app.registration.exceptions.Failure
 import am.chamich.app.registration.extensions.createToast
 import am.chamich.app.registration.extensions.observe
@@ -17,7 +17,7 @@ import androidx.databinding.DataBindingUtil
 
 class RestorePasswordFragment : CoreFragment() {
 
-    private lateinit var binding: RestorePasswordFragmentBinding
+    private lateinit var binding: FragmentRestorePasswordBinding
     private lateinit var restorePasswordViewModel: RestorePasswordViewModel
 
     override fun onAttach(context: Context) {
@@ -38,7 +38,7 @@ class RestorePasswordFragment : CoreFragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(
-            inflater, R.layout.restore_password_fragment, container, false
+            inflater, R.layout.fragment_restore_password, container, false
         )
         binding.fragment = this
         return binding.root

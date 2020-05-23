@@ -17,7 +17,8 @@
     <fragment
         android:id="@+id/destination_fragment_sign_in"
         android:name="am.chamich.app.registration.features.signin.SignInFragment"
-        android:label="SignInFragment">
+        android:label="SignInFragment"
+        tools:layout="@layout/fragment_sign_in">
         <action
             android:id="@+id/action_signInFragment_to_restorePasswordFragment"
             app:destination="@id/destination_fragment_restore_password" />
@@ -28,9 +29,11 @@
     <fragment
         android:id="@+id/destination_fragment_restore_password"
         android:name="am.chamich.app.registration.features.password.RestorePasswordFragment"
-        android:label="RestorePasswordFragment" />
+        android:label="RestorePasswordFragment"
+        tools:layout="@layout/fragment_restore_password" />
     <fragment
         android:id="@+id/destination_fragment_sign_up"
         android:name="am.chamich.app.registration.features.signup.SignUpFragment"
-        android:label="SignUpFragment" />
+        android:label="SignUpFragment"
+        tools:layout="@layout/fragment_sign_up" />
 </navigation>

@@ -2,7 +2,7 @@ package am.chamich.app.registration.features.signup
 
 import am.chamich.app.registration.R
 import am.chamich.app.registration.core.CoreFragment
-import am.chamich.app.registration.databinding.SignUpFragmentBinding
+import am.chamich.app.registration.databinding.FragmentSignUpBinding
 import am.chamich.app.registration.exceptions.Failure
 import am.chamich.app.registration.extensions.*
 import am.chamich.app.registration.features.EXTRA_USER_ID
@@ -18,7 +18,7 @@ import androidx.databinding.DataBindingUtil
 
 class SignUpFragment : CoreFragment() {
 
-    private lateinit var binding: SignUpFragmentBinding
+    private lateinit var binding: FragmentSignUpBinding
     private lateinit var signUpViewModel: SignUpViewModel
 
     override fun onAttach(context: Context) {
@@ -39,7 +39,7 @@ class SignUpFragment : CoreFragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(
-            inflater, R.layout.sign_up_fragment, container, false
+            inflater, R.layout.fragment_sign_up, container, false
         )
         binding.fragment = this
         return binding.root
