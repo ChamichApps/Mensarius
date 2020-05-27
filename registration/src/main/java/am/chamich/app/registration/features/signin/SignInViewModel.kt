@@ -17,10 +17,8 @@ class SignInViewModel @Inject constructor(
 ) : CoreViewModel() {
 
     private val success: MutableLiveData<IUser> = MutableLiveData()
-    val signedInUser: LiveData<IUser>
-        get() = success
-    val signInFailure: LiveData<Failure>
-        get() = failure
+    val signedInUser: LiveData<IUser> = success
+    val signInFailure: LiveData<Failure> = failure
 
     fun signIn(email: String, password: String) {
         viewModelScope.launch {

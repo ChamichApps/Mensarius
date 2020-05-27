@@ -122,7 +122,7 @@ class SignInFragmentTest {
     @Test
     fun when_ServerGeneratesError_then_UserInformed() {
         mocks.every { mockedViewModel.signIn(any(), any()) } answers {
-            failureLiveData.value = Failure.SignInException("User does not exists.")
+            failureLiveData.value = Failure.SignInException(SIGN_IN_EXCEPTION_MESSAGE)
         }
 
         actions.enterText(R.id.edit_text_email, VALID_EMAIL)
@@ -130,7 +130,7 @@ class SignInFragmentTest {
 
         actions.performClick(R.id.button_sign_in)
 
-        matchers.toastWithMessageIsDisplayed(R.string.error_sign_in_failed)
+        matchers.toastWithMessageIsDisplayed(SIGN_IN_EXCEPTION_MESSAGE)
     }
 
     private fun launchFragment(): FragmentScenario<SignInFragment> {
@@ -145,6 +145,7 @@ class SignInFragmentTest {
     }
 
     companion object {
+        const val SIGN_IN_EXCEPTION_MESSAGE = "User does not exists."
         const val USER_ID = "0125151b-40ea-4ba6-972c-2400cca9fcb1"
         const val INVALID_EMAIL = "chamich.apps@gmail"
         const val VALID_EMAIL = "chamich.apps@gmail.com"

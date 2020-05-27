@@ -10,15 +10,13 @@ import am.chamich.app.registration.extensions.textAsString
 import am.chamich.app.registration.extensions.viewModel
 import android.content.Context
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
 
-class RestorePasswordFragment : CoreFragment() {
+class RestorePasswordFragment : CoreFragment<FragmentRestorePasswordBinding>() {
 
-    private lateinit var binding: FragmentRestorePasswordBinding
     private lateinit var restorePasswordViewModel: RestorePasswordViewModel
+
+    override var layoutId: Int = R.layout.fragment_restore_password
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -33,29 +31,28 @@ class RestorePasswordFragment : CoreFragment() {
         }
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        binding = DataBindingUtil.inflate(
-            inflater, R.layout.fragment_restore_password, container, false
-        )
-        binding.fragment = this
-        return binding.root
-    }
-
-    fun onPasswordRestoreClicked() {
-        if (isEmailInputCorrect(binding.textInputLayoutEmail)) {
-            restorePasswordViewModel.restorePassword(binding.editTextEmail.textAsString)
-        }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding.listener = ClickListener()
     }
 
     private fun handlePasswordRestoreSuccess(email: String?) {
-        toast =
-            requireContext().createToast(R.string.text_password_restore_success).apply { show() }
+        toast = requireContext()
+            .createToast(R.string.text_password_restore_success)
+            .apply { show() }
     }
 
     private fun handlePasswordRestoreFailure(failure: Failure?) {
-        toast = requireContext().createToast(R.string.error_password_restore).apply { show() }
+        toast = requireContext()
+            .createToast(failure?.message)
+            .apply { show() }
+    }
+
+    inner class ClickListener {
+        fun onPasswordRestoreClicked() {
+            if (isEmailInputCorrect(binding.textInputLayoutEmail)) {
+                restorePasswordViewModel.restorePassword(binding.editTextEmail.textAsString)
+            }
+        }
     }
 }

@@ -131,7 +131,7 @@ class SignUpFragmentTest {
 
         actions.performClick(R.id.button_create_account)
 
-        matchers.toastWithMessageIsDisplayed(R.string.error_sign_up_failed)
+        matchers.toastWithMessageIsDisplayed(SIGN_UP_EXCEPTION_MESSAGE)
     }
 
     private fun launchFragment(): FragmentScenario<SignUpFragment> {
@@ -146,6 +146,7 @@ class SignUpFragmentTest {
     }
 
     companion object {
+        const val SIGN_UP_EXCEPTION_MESSAGE = "Sign Up Failed"
         const val USER_ID = "8ed8a059-71b9-4856-bada-718ff440a11b"
         const val INVALID_EMAIL = "chamich.apps@gmail"
         const val VALID_EMAIL = "chamich.apps@gmail.com"

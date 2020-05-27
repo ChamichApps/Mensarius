@@ -13,15 +13,13 @@ import am.chamich.app.registration.model.api.IUser
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
 
-class SignInFragment : CoreFragment() {
+class SignInFragment : CoreFragment<FragmentSignInBinding>() {
 
-    private lateinit var binding: FragmentSignInBinding
     private lateinit var signInViewModel: SignInViewModel
+
+    override var layoutId: Int = R.layout.fragment_sign_in
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -36,36 +34,9 @@ class SignInFragment : CoreFragment() {
         }
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        binding = DataBindingUtil.inflate(
-            inflater, R.layout.fragment_sign_in, container, false
-        )
-        binding.fragment = this
-        return binding.root
-    }
-
-    fun onSignInClicked() {
-        val isValidEmail = isEmailInputCorrect(binding.textInputLayoutEmail)
-        val isValidPassword = isPasswordInputCorrect(binding.textInputLayoutPassword)
-
-        if (isValidEmail && isValidPassword) {
-            showProgress()
-            signInViewModel.signIn(
-                binding.editTextEmail.textAsString,
-                binding.editTextPassword.textAsString
-            )
-        }
-    }
-
-    fun onSignUpClicked() {
-        navigator.navigate(this, R.id.destination_fragment_sign_up)
-    }
-
-    fun onRestorePasswordClicked() {
-        navigator.navigate(this, R.id.destination_fragment_restore_password)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding.listener = ClickListeners()
     }
 
     private fun handleSignInSuccess(user: IUser?) {
@@ -79,6 +50,32 @@ class SignInFragment : CoreFragment() {
 
     private fun handleSignInFailure(failure: Failure?) {
         hideProgress()
-        toast = requireContext().createToast(R.string.error_sign_in_failed).apply { show() }
+        toast = requireContext()
+            .createToast(failure?.message)
+            .apply { show() }
+    }
+
+    inner class ClickListeners {
+        fun onSignUpClicked() {
+            navigator.navigate(this@SignInFragment, R.id.destination_fragment_sign_up)
+        }
+
+        fun onRestorePasswordClicked() {
+            navigator.navigate(this@SignInFragment, R.id.destination_fragment_restore_password)
+        }
+
+        fun onSignInClicked() {
+            val isValidEmail = isEmailInputCorrect(binding.layoutInput.textInputLayoutEmail)
+            val isValidPassword =
+                isPasswordInputCorrect(binding.layoutInput.textInputLayoutPassword)
+
+            if (isValidEmail && isValidPassword) {
+                showProgress()
+                signInViewModel.signIn(
+                    binding.layoutInput.editTextEmail.textAsString,
+                    binding.layoutInput.editTextPassword.textAsString
+                )
+            }
+        }
     }
 }

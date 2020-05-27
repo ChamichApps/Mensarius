@@ -16,10 +16,8 @@ class RestorePasswordViewModel @Inject constructor(
 ) : CoreViewModel() {
 
     private val success: MutableLiveData<String> = MutableLiveData()
-    val passwordSendEmail: LiveData<String>
-        get() = success
-    val passwordSendFailure: LiveData<Failure>
-        get() = failure
+    val passwordSendEmail: LiveData<String> = success
+    val passwordSendFailure: LiveData<Failure> = failure
 
     fun restorePassword(email: String) {
         viewModelScope.launch {

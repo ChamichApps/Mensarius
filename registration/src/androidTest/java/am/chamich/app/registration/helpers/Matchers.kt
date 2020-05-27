@@ -31,6 +31,10 @@ class Matchers {
         onView(withText(text)).inRoot(ToastMatcher()).check(matches(isDisplayed()))
     }
 
+    fun toastWithMessageIsDisplayed(text: String) {
+        onView(withText(text)).inRoot(ToastMatcher()).check(matches(isDisplayed()))
+    }
+
     class ToastMatcher : TypeSafeMatcher<Root?>() {
         override fun describeTo(description: Description?) {
             description?.appendText("is toast")

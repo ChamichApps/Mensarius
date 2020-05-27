@@ -13,15 +13,13 @@ import am.chamich.app.registration.model.api.IUser
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
 
-class SignUpFragment : CoreFragment() {
+class SignUpFragment : CoreFragment<FragmentSignUpBinding>() {
 
-    private lateinit var binding: FragmentSignUpBinding
     private lateinit var signUpViewModel: SignUpViewModel
+
+    override var layoutId: Int = R.layout.fragment_sign_up
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -36,32 +34,9 @@ class SignUpFragment : CoreFragment() {
         }
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        binding = DataBindingUtil.inflate(
-            inflater, R.layout.fragment_sign_up, container, false
-        )
-        binding.fragment = this
-        return binding.root
-    }
-
-    fun onSignUpClicked() {
-        val isValidEmail = isEmailInputCorrect(binding.textInputLayoutEmail)
-        val isValidPassword = isPasswordInputCorrect(binding.textInputLayoutPassword)
-
-        if (isValidEmail && isValidPassword) {
-            showProgress()
-            signUpViewModel.signUp(
-                binding.editTextEmail.textAsString,
-                binding.editTextPassword.textAsString
-            )
-        }
-    }
-
-    fun onSignInClicked() {
-        navigator.navigate(this, R.id.destination_fragment_sign_in)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding.listener = ClickListener()
     }
 
     private fun handleSignUpSuccess(user: IUser?) {
@@ -75,6 +50,28 @@ class SignUpFragment : CoreFragment() {
 
     private fun handleSignUpFailure(failure: Failure?) {
         hideProgress()
-        toast = requireContext().createToast(R.string.error_sign_up_failed).apply { show() }
+        toast = requireContext()
+            .createToast(failure?.message)
+            .apply { show() }
+    }
+
+    inner class ClickListener {
+        fun onSignUpClicked() {
+            val isValidEmail = isEmailInputCorrect(binding.layoutInput.textInputLayoutEmail)
+            val isValidPassword =
+                isPasswordInputCorrect(binding.layoutInput.textInputLayoutPassword)
+
+            if (isValidEmail && isValidPassword) {
+                showProgress()
+                signUpViewModel.signUp(
+                    binding.layoutInput.editTextEmail.textAsString,
+                    binding.layoutInput.editTextPassword.textAsString
+                )
+            }
+        }
+
+        fun onSignInClicked() {
+            navigator.navigate(this@SignUpFragment, R.id.destination_fragment_sign_in)
+        }
     }
 }

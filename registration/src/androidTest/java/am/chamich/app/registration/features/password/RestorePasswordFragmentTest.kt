@@ -74,7 +74,7 @@ class RestorePasswordFragmentTest {
         actions.enterText(R.id.edit_text_email, VALID_EMAIL)
         actions.performClick(R.id.button_restore_password)
 
-        matchers.toastWithMessageIsDisplayed(R.string.error_password_restore)
+        matchers.toastWithMessageIsDisplayed(PASSWORD_RECOVERY_EXCEPTION_MESSAGE)
     }
 
     private fun launchFragment(): FragmentScenario<RestorePasswordFragment> {
@@ -88,6 +88,7 @@ class RestorePasswordFragmentTest {
     }
 
     companion object {
+        const val PASSWORD_RECOVERY_EXCEPTION_MESSAGE = "Provided email address does not exists"
         const val INVALID_EMAIL = "chamich.apps@gmail"
         const val VALID_EMAIL = "chamich.apps@gmail.com"
     }
