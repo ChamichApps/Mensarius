@@ -1,5 +1,6 @@
 package am.chamich.app.registration.di.viewmodel
 
+import am.chamich.app.registration.features.home.HomeViewModel
 import am.chamich.app.registration.features.password.RestorePasswordViewModel
 import am.chamich.app.registration.features.signin.SignInViewModel
 import am.chamich.app.registration.features.signup.SignUpViewModel
@@ -13,6 +14,11 @@ import dagger.multibindings.IntoMap
 abstract class ViewModelModule {
     @Binds
     internal abstract fun bindViewModelFactory(factory: ViewModelFactory): ViewModelProvider.Factory
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(HomeViewModel::class)
+    abstract fun bindsHomeViewModel(homeViewModel: HomeViewModel): ViewModel
 
     @Binds
     @IntoMap

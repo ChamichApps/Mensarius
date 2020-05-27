@@ -2,7 +2,7 @@ package am.chamich.app.registration.features.password
 
 import am.chamich.app.registration.R
 import am.chamich.app.registration.core.CoreFragment
-import am.chamich.app.registration.databinding.FragmentRestorePasswordBinding
+import am.chamich.app.registration.databinding.RegistrationFragmentRestorePasswordBinding
 import am.chamich.app.registration.exceptions.Failure
 import am.chamich.app.registration.extensions.createToast
 import am.chamich.app.registration.extensions.observe
@@ -12,11 +12,11 @@ import android.content.Context
 import android.os.Bundle
 import android.view.View
 
-class RestorePasswordFragment : CoreFragment<FragmentRestorePasswordBinding>() {
+class RestorePasswordFragment : CoreFragment<RegistrationFragmentRestorePasswordBinding>() {
 
     private lateinit var restorePasswordViewModel: RestorePasswordViewModel
 
-    override var layoutId: Int = R.layout.fragment_restore_password
+    override var layoutId: Int = R.layout.registration_fragment_restore_password
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -33,7 +33,7 @@ class RestorePasswordFragment : CoreFragment<FragmentRestorePasswordBinding>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.listener = ClickListener()
+        binding.listener = ClickListeners()
     }
 
     private fun handlePasswordRestoreSuccess(email: String?) {
@@ -48,7 +48,7 @@ class RestorePasswordFragment : CoreFragment<FragmentRestorePasswordBinding>() {
             .apply { show() }
     }
 
-    inner class ClickListener {
+    inner class ClickListeners {
         fun onPasswordRestoreClicked() {
             if (isEmailInputCorrect(binding.textInputLayoutEmail)) {
                 restorePasswordViewModel.restorePassword(binding.editTextEmail.textAsString)

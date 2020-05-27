@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+    <dimen name="registration_margin_standard">8dp</dimen>
+    <dimen name="registration_margin_triple">32dp</dimen>
+</resources>

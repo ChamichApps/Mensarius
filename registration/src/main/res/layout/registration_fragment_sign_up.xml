@@ -5,10 +5,9 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <variable
             name="listener"
-            type="am.chamich.app.registration.features.signup.SignUpFragment.ClickListener" />
+            type="am.chamich.app.registration.features.signup.SignUpFragment.ClickListeners" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -31,7 +30,7 @@
             android:id="@+id/label_create_new_account"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="@dimen/registration_margin_standard"
             android:text="@string/text_create_new_account"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
             app:layout_constraintEnd_toEndOf="parent"
@@ -40,10 +39,10 @@
 
         <include
             android:id="@+id/layout_input"
-            layout="@layout/view_input"
+            layout="@layout/registration_view_input"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="@dimen/registration_margin_triple"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -53,9 +52,9 @@
             android:id="@+id/button_create_account"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="32dp"
+            android:layout_marginStart="@dimen/registration_margin_triple"
+            android:layout_marginTop="@dimen/registration_margin_standard"
+            android:layout_marginEnd="@dimen/registration_margin_triple"
             android:onClick="@{()-> listener.onSignUpClicked()}"
             android:text="@string/text_button_create_account"
             app:layout_constraintEnd_toEndOf="parent"
@@ -67,9 +66,9 @@
             style="@style/Widget.MaterialComponents.Button.TextButton"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:layout_marginEnd="32dp"
-            android:layout_marginBottom="8dp"
+            android:layout_marginStart="@dimen/registration_margin_triple"
+            android:layout_marginEnd="@dimen/registration_margin_triple"
+            android:layout_marginBottom="@dimen/registration_margin_standard"
             android:onClick="@{()-> listener.onSignInClicked()}"
             android:text="@string/text_have_an_account_sign_in"
             app:layout_constraintBottom_toBottomOf="parent"

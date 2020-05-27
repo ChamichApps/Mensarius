@@ -2,7 +2,7 @@ package am.chamich.app.registration.features.signin
 
 import am.chamich.app.registration.R
 import am.chamich.app.registration.core.CoreFragment
-import am.chamich.app.registration.databinding.FragmentSignInBinding
+import am.chamich.app.registration.databinding.RegistrationFragmentSignInBinding
 import am.chamich.app.registration.exceptions.Failure
 import am.chamich.app.registration.extensions.*
 import am.chamich.app.registration.features.EXTRA_USER_EMAIL
@@ -15,11 +15,11 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 
-class SignInFragment : CoreFragment<FragmentSignInBinding>() {
+class SignInFragment : CoreFragment<RegistrationFragmentSignInBinding>() {
 
     private lateinit var signInViewModel: SignInViewModel
 
-    override var layoutId: Int = R.layout.fragment_sign_in
+    override var layoutId: Int = R.layout.registration_fragment_sign_in
 
     override fun onAttach(context: Context) {
         super.onAttach(context)

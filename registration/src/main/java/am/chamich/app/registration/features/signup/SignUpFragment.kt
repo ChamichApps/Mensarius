@@ -2,7 +2,7 @@ package am.chamich.app.registration.features.signup
 
 import am.chamich.app.registration.R
 import am.chamich.app.registration.core.CoreFragment
-import am.chamich.app.registration.databinding.FragmentSignUpBinding
+import am.chamich.app.registration.databinding.RegistrationFragmentSignUpBinding
 import am.chamich.app.registration.exceptions.Failure
 import am.chamich.app.registration.extensions.*
 import am.chamich.app.registration.features.EXTRA_USER_EMAIL
@@ -15,11 +15,11 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 
-class SignUpFragment : CoreFragment<FragmentSignUpBinding>() {
+class SignUpFragment : CoreFragment<RegistrationFragmentSignUpBinding>() {
 
     private lateinit var signUpViewModel: SignUpViewModel
 
-    override var layoutId: Int = R.layout.fragment_sign_up
+    override var layoutId: Int = R.layout.registration_fragment_sign_up
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -36,7 +36,7 @@ class SignUpFragment : CoreFragment<FragmentSignUpBinding>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.listener = ClickListener()
+        binding.listener = ClickListeners()
     }
 
     private fun handleSignUpSuccess(user: IUser?) {
@@ -55,7 +55,7 @@ class SignUpFragment : CoreFragment<FragmentSignUpBinding>() {
             .apply { show() }
     }
 
-    inner class ClickListener {
+    inner class ClickListeners {
         fun onSignUpClicked() {
             val isValidEmail = isEmailInputCorrect(binding.layoutInput.textInputLayoutEmail)
             val isValidPassword =
