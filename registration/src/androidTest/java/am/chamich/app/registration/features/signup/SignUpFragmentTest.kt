@@ -58,13 +58,13 @@ class SignUpFragmentTest {
         actions.enterText(R.id.edit_text_password, VALID_PASSWORD)
         actions.performClick(R.id.button_create_account)
 
-        matchers.viewIsDisplayedAndContainsText(R.string.error_email_invalid)
+        matchers.viewIsDisplayedAndContainsText(R.string.registration_error_email_invalid)
 
         actions.enterText(R.id.edit_text_email, VALID_EMAIL)
         actions.performClick(R.id.button_create_account)
 
-        matchers.viewWithTextIsNotDisplayed(R.string.error_email_invalid)
-        matchers.viewWithTextIsNotDisplayed(R.string.error_password_invalid)
+        matchers.viewWithTextIsNotDisplayed(R.string.registration_error_email_invalid)
+        matchers.viewWithTextIsNotDisplayed(R.string.registration_error_password_invalid)
 
         mocks.verify(times = 1) { mockedViewModel.signUp(VALID_EMAIL, VALID_PASSWORD) }
     }
@@ -75,13 +75,13 @@ class SignUpFragmentTest {
         actions.enterText(R.id.edit_text_password, INVALID_PASSWORD)
         actions.performClick(R.id.button_create_account)
 
-        matchers.viewIsDisplayedAndContainsText(R.string.error_password_invalid)
+        matchers.viewIsDisplayedAndContainsText(R.string.registration_error_password_invalid)
 
         actions.enterText(R.id.edit_text_password, VALID_PASSWORD)
         actions.performClick(R.id.button_create_account)
 
-        matchers.viewWithTextIsNotDisplayed(R.string.error_email_invalid)
-        matchers.viewWithTextIsNotDisplayed(R.string.error_password_invalid)
+        matchers.viewWithTextIsNotDisplayed(R.string.registration_error_email_invalid)
+        matchers.viewWithTextIsNotDisplayed(R.string.registration_error_password_invalid)
 
         mocks.verify(times = 1) { mockedViewModel.signUp(VALID_EMAIL, VALID_PASSWORD) }
     }
@@ -93,8 +93,8 @@ class SignUpFragmentTest {
 
         actions.performClick(R.id.button_create_account)
 
-        matchers.viewIsDisplayedAndContainsText(R.string.error_email_invalid)
-        matchers.viewIsDisplayedAndContainsText(R.string.error_password_invalid)
+        matchers.viewIsDisplayedAndContainsText(R.string.registration_error_email_invalid)
+        matchers.viewIsDisplayedAndContainsText(R.string.registration_error_password_invalid)
 
         mocks.verify(times = 0) { mockedViewModel.signUp(any(), any()) }
     }

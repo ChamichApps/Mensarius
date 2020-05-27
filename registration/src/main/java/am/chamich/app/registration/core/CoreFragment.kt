@@ -60,14 +60,16 @@ abstract class CoreFragment<T : ViewDataBinding> : Fragment() {
     // TODO: Move this method to extension
     protected fun isEmailInputCorrect(textInputLayout: TextInputLayout) =
         textInputLayout.editText!!.textAsString.isValidEmail.apply {
-            textInputLayout.error = if (!this) getString(R.string.error_email_invalid) else null
+            textInputLayout.error =
+                if (!this) getString(R.string.registration_error_email_invalid) else null
             textInputLayout.isErrorEnabled = !this
         }
 
     // TODO: Move this method to extension
     protected fun isPasswordInputCorrect(textInputLayout: TextInputLayout) =
         textInputLayout.editText!!.textAsString.isValidPassword.apply {
-            textInputLayout.error = if (!this) getString(R.string.error_password_invalid) else null
+            textInputLayout.error =
+                if (!this) getString(R.string.registration_error_password_invalid) else null
             textInputLayout.isErrorEnabled = !this
         }
 }

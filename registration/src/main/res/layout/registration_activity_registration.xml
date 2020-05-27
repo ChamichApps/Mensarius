@@ -20,7 +20,7 @@
             android:paddingEnd="16dp"
             app:contentInsetStartWithNavigation="0dp"
             app:navigationIcon="@android:drawable/ic_menu_close_clear_cancel"
-            app:titleTextColor="@color/colorWhite" />
+            app:titleTextColor="@color/registration_color_white" />
 
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -31,13 +31,13 @@
         android:layout_height="match_parent"
         app:defaultNavHost="true"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        app:navGraph="@navigation/navigation_registration" />
+        app:navGraph="@navigation/registration_navigation" />
 
     <LinearLayout
         android:id="@+id/layout_progress"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/colorTransparentGrey"
+        android:background="@color/registration_color_transparent_grey"
         android:gravity="center"
         android:orientation="vertical"
         android:visibility="gone"

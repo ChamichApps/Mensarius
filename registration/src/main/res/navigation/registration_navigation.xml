@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -8,16 +9,17 @@
     <fragment
         android:id="@+id/destination_fragment_home"
         android:name="am.chamich.app.registration.features.home.HomeFragment"
-        android:label="@string/text_label_registration"
+        android:label="@string/registration_text_label_registration"
         tools:layout="@layout/registration_fragment_home">
         <action
             android:id="@+id/action_homeFragment_to_signInFragment"
             app:destination="@id/destination_fragment_sign_in" />
     </fragment>
+
     <fragment
         android:id="@+id/destination_fragment_sign_in"
         android:name="am.chamich.app.registration.features.signin.SignInFragment"
-        android:label="@string/text_label_sign_in"
+        android:label="@string/registration_text_label_sign_in"
         tools:layout="@layout/registration_fragment_sign_in">
         <action
             android:id="@+id/action_signInFragment_to_restorePasswordFragment"
@@ -26,14 +28,17 @@
             android:id="@+id/action_signInFragment_to_signUpFragment"
             app:destination="@id/destination_fragment_sign_up" />
     </fragment>
+
     <fragment
         android:id="@+id/destination_fragment_restore_password"
         android:name="am.chamich.app.registration.features.password.RestorePasswordFragment"
-        android:label="@string/text_label_restore_password"
+        android:label="@string/registration_text_label_restore_password"
         tools:layout="@layout/registration_fragment_restore_password" />
+
     <fragment
         android:id="@+id/destination_fragment_sign_up"
         android:name="am.chamich.app.registration.features.signup.SignUpFragment"
-        android:label="@string/text_label_sign_up"
+        android:label="@string/registration_text_label_sign_up"
         tools:layout="@layout/registration_fragment_sign_up" />
+
 </navigation>

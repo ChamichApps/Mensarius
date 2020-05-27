@@ -14,7 +14,7 @@ import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
-import kotlinx.android.synthetic.main.activity_registration.*
+import kotlinx.android.synthetic.main.registration_activity_registration.*
 
 const val RESULT_SIGN_UP_SUCCESS = 10000
 const val RESULT_SIGN_IN_SUCCESS = 10001
@@ -37,7 +37,7 @@ class RegistrationActivity : AppCompatActivity(), AppBarConfiguration.OnNavigate
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_registration)
+        setContentView(R.layout.registration_activity_registration)
 
         initializeProgressAndDisableClicks()
         setupNavController()

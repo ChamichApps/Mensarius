@@ -38,7 +38,7 @@ class RestorePasswordFragment : CoreFragment<RegistrationFragmentRestorePassword
 
     private fun handlePasswordRestoreSuccess(email: String?) {
         toast = requireContext()
-            .createToast(R.string.text_password_restore_success)
+            .createToast(R.string.registration_text_password_restore_success)
             .apply { show() }
     }
 

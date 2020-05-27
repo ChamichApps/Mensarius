@@ -1,33 +1,30 @@
 <resources>
 
-    <string name="text_sign_in">Sign In</string>
-    <string name="text_sign_up">Sign Up</string>
-    <string name="text_restore_password">Restore Password</string>
-    <string name="text_registration">Registration</string>
+    <string name="registration_text_sign_in">Sign In</string>
+    <string name="registration_text_sign_up">Sign Up</string>
+    <string name="registration_text_restore_password">Restore Password</string>
+    <string name="registration_text_registration">Registration</string>
 
-    <string name="text_button_sign_in">@string/text_sign_in</string>
-    <string name="text_button_sign_up">@string/text_sign_up</string>
-    <string name="text_label_sign_in">@string/text_sign_in</string>
-    <string name="text_label_sign_up">@string/text_sign_up</string>
-    <string name="text_label_restore_password">@string/text_restore_password</string>
-    <string name="text_label_registration">@string/text_registration</string>
+    <string name="registration_text_button_sign_in">@string/registration_text_sign_in</string>
+    <string name="registration_text_button_sign_up">@string/registration_text_sign_up</string>
+    <string name="registration_text_label_sign_in">@string/registration_text_sign_in</string>
+    <string name="registration_text_label_sign_up">@string/registration_text_sign_up</string>
+    <string name="registration_text_label_restore_password">@string/registration_text_restore_password</string>
+    <string name="registration_text_label_registration">@string/registration_text_registration</string>
 
 
-    <string name="hint_email">Email</string>
-    <string name="hint_password">Password</string>
-    <string name="text_welcome_back">Welcome back!</string>
-    <string name="text_create_new_account">Create a new account</string>
-    <string name="text_forgot_password">Forgot your password?</string>
-    <string name="text_button_forgot_password">Forgot Password?</string>
-    <string name="text_button_create_account">Create Account</string>
-    <string name="text_button_restore">Restore</string>
-    <string name="text_have_an_account_sign_in">Already have an account? Sign In</string>
-    <string name="text_dont_have_an_account_sign_up">Don\'t have an account? Sign Up</string>
-    <string name="text_password_restore_success">Password Restore instructions were successfully send.</string>
+    <string name="registration_hint_email">Email</string>
+    <string name="registration_hint_password">Password</string>
+    <string name="registration_text_welcome_back">Welcome back!</string>
+    <string name="registration_text_create_new_account">Create a new account</string>
+    <string name="registration_text_forgot_password">Forgot your password?</string>
+    <string name="registration_text_button_forgot_password">Forgot Password?</string>
+    <string name="registration_text_button_create_account">Create Account</string>
+    <string name="registration_text_button_restore">Restore</string>
+    <string name="registration_text_have_an_account_sign_in">Already have an account? Sign In</string>
+    <string name="registration_text_dont_have_an_account_sign_up">Don\'t have an account? Sign Up</string>
+    <string name="registration_text_password_restore_success">Password Restore instructions were successfully send.</string>
 
-    <string name="error_email_invalid">Email is not valid</string>
-    <string name="error_password_invalid">Password is not valid</string>
-    <string name="error_sign_in_failed">Sign In failed, please try again</string>
-    <string name="error_sign_up_failed">Sign Up failed, please try again</string>
-    <string name="error_password_restore">Password Restore Failed, please try again</string>
+    <string name="registration_error_email_invalid">Email is not valid</string>
+    <string name="registration_error_password_invalid">Password is not valid</string>
 </resources>

@@ -49,14 +49,14 @@ class IntegrationTest {
         actions.performClick(R.id.button_sign_up)
 
         matchers.viewWithIdIsDisplayed(R.id.button_create_account)
-        matchers.viewIsDisplayedAndContainsText(R.string.text_have_an_account_sign_in)
+        matchers.viewIsDisplayedAndContainsText(R.string.registration_text_have_an_account_sign_in)
     }
 
     private fun navigateToSignInWithVerification() {
         actions.performClick(R.id.button_sign_in)
 
         matchers.viewWithIdIsDisplayed(R.id.button_sign_in)
-        matchers.viewIsDisplayedAndContainsText(R.string.text_dont_have_an_account_sign_up)
-        matchers.viewIsDisplayedAndContainsText(R.string.text_button_forgot_password)
+        matchers.viewIsDisplayedAndContainsText(R.string.registration_text_dont_have_an_account_sign_up)
+        matchers.viewIsDisplayedAndContainsText(R.string.registration_text_button_forgot_password)
     }
 }

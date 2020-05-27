@@ -41,12 +41,12 @@ class RestorePasswordFragmentTest {
         actions.enterText(R.id.edit_text_email, INVALID_EMAIL)
         actions.performClick(R.id.button_restore_password)
 
-        matchers.viewIsDisplayedAndContainsText(R.string.error_email_invalid)
+        matchers.viewIsDisplayedAndContainsText(R.string.registration_error_email_invalid)
 
         actions.enterText(R.id.edit_text_email, VALID_EMAIL)
         actions.performClick(R.id.button_restore_password)
 
-        matchers.viewWithTextIsNotDisplayed(R.string.error_email_invalid)
+        matchers.viewWithTextIsNotDisplayed(R.string.registration_error_email_invalid)
 
         mocks.verify(times = 1) { mockedViewModel.restorePassword(VALID_EMAIL) }
     }
@@ -60,7 +60,7 @@ class RestorePasswordFragmentTest {
         actions.enterText(R.id.edit_text_email, VALID_EMAIL)
         actions.performClick(R.id.button_restore_password)
 
-        matchers.toastWithMessageIsDisplayed(R.string.text_password_restore_success)
+        matchers.toastWithMessageIsDisplayed(R.string.registration_text_password_restore_success)
     }
 
     @Test
