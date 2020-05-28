@@ -18,7 +18,6 @@ internal class FirebaseAuthenticator(
     init {
         Log.d(TAG, "|-------------| Firebase Authenticator Created |------------|")
         Log.d(TAG, "|---- Authenticator Object ID: ${System.identityHashCode(this)}")
-
     }
 
     @Throws(Failure.SignInException::class)
@@ -28,11 +27,16 @@ internal class FirebaseAuthenticator(
             val data = authenticator.signInWithEmailAndPassword(email, password).await()
             val user = data.user
             return if (user != null) {
+                Log.d(
+                    TAG, "|---- Signed In with ID: " +
+                            "${user.uid}, Email: ${user.email}, Display Name: ${user.displayName}"
+                )
                 User(user.uid, user.email, user.displayName)
             } else {
                 UnknownUser()
             }
         } catch (exception: Exception) {
+            Log.e(TAG, "Sign In Failed", exception)
             throw Failure.SignInException(exception.localizedMessage)
         }
     }
@@ -44,12 +48,17 @@ internal class FirebaseAuthenticator(
             val data = authenticator.createUserWithEmailAndPassword(email, password).await()
             val user = data.user
             return if (user != null) {
+                Log.d(
+                    TAG, "|---- Signed Up with ID: " +
+                            "${user.uid}, Email: ${user.email}, Display Name: ${user.displayName}"
+                )
                 return User(user.uid, user.email, user.displayName)
             } else {
                 UnknownUser()
             }
         } catch (exception: Exception) {
-            throw Failure.SignUpException(exception.message)
+            Log.e(TAG, "Sign Up Failed", exception)
+            throw Failure.SignUpException(exception.localizedMessage)
         }
     }
 
@@ -58,8 +67,10 @@ internal class FirebaseAuthenticator(
         Log.d(TAG, "|--------------------| Restore Password |-------------------|")
         try {
             authenticator.sendPasswordResetEmail(email).await()
+            Log.d(TAG, "Password Restore instructions send to: $email")
             return email
         } catch (exception: Exception) {
+            Log.e(TAG, "Password Restore Failed", exception)
             throw Failure.PasswordRecoveryException(exception.localizedMessage)
         }
     }
