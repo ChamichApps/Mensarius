@@ -1,0 +1,32 @@
+package am.chamich.app.account.features.accounts
+
+import am.chamich.app.account.R
+import am.chamich.app.account.helpers.ViewModelFactory
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentFactory
+import androidx.fragment.app.testing.FragmentScenario
+import androidx.fragment.app.testing.launchFragmentInContainer
+import io.mockk.mockk
+import org.junit.Test
+
+class AccountsFragmentTest {
+
+    private val mockedViewModel: AccountsViewModel = mockk(relaxed = true)
+
+    @Test
+    fun a() {
+        launchFragment()
+        Thread.sleep(4000)
+    }
+
+
+    private fun launchFragment(): FragmentScenario<AccountsFragment> {
+        return launchFragmentInContainer(factory = object : FragmentFactory() {
+            override fun instantiate(classLoader: ClassLoader, className: String): Fragment {
+                return AccountsFragment().apply {
+                    viewModelFactory = ViewModelFactory(mockedViewModel)
+                }
+            }
+        }, themeResId = R.style.Theme_MaterialComponents_Light)
+    }
+}
