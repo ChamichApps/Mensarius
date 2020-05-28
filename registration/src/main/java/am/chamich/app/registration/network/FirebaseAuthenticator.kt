@@ -15,9 +15,15 @@ class FirebaseAuthenticator(
     private val authenticator: FirebaseAuth
 ) : IAuthenticator {
 
+    init {
+        Log.d(TAG, "|-------------| Firebase Authenticator Created |------------|")
+        Log.d(TAG, "|---- Authenticator Object ID: ${System.identityHashCode(this)}")
+
+    }
+
     @Throws(Failure.SignInException::class)
     override suspend fun signIn(email: String, password: String): IUser {
-        Log.d(TAG, "------------------------| Sign In |------------------------")
+        Log.d(TAG, "|------------------------| Sign In |------------------------|")
         try {
             val data = authenticator.signInWithEmailAndPassword(email, password).await()
             val user = data.user
@@ -33,7 +39,7 @@ class FirebaseAuthenticator(
 
     @Throws(Failure.SignUpException::class)
     override suspend fun signUp(email: String, password: String): IUser {
-        Log.d(TAG, "------------------------| Sign Up |------------------------")
+        Log.d(TAG, "|------------------------| Sign Up |------------------------|")
         try {
             val data = authenticator.createUserWithEmailAndPassword(email, password).await()
             val user = data.user
@@ -49,7 +55,7 @@ class FirebaseAuthenticator(
 
     @Throws(Failure.PasswordRecoveryException::class)
     override suspend fun restorePassword(email: String): String {
-        Log.d(TAG, "--------------------| Restore Password |-------------------")
+        Log.d(TAG, "|--------------------| Restore Password |-------------------|")
         try {
             authenticator.sendPasswordResetEmail(email).await()
             return email
