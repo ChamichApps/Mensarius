@@ -2,8 +2,8 @@ package am.chamich.app.registration.features.signup
 
 import am.chamich.app.registration.exceptions.Failure
 import am.chamich.app.registration.helpers.TestCoroutineRule
-import am.chamich.app.registration.model.User
-import am.chamich.app.registration.model.api.IUser
+import am.chamich.app.registration.models.User
+import am.chamich.app.registration.models.api.IUser
 import am.chamich.app.registration.network.api.IAuthenticator
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer

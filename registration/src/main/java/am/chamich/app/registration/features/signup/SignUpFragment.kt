@@ -9,7 +9,7 @@ import am.chamich.app.registration.features.EXTRA_USER_EMAIL
 import am.chamich.app.registration.features.EXTRA_USER_ID
 import am.chamich.app.registration.features.EXTRA_USER_NAME
 import am.chamich.app.registration.features.RESULT_SIGN_UP_SUCCESS
-import am.chamich.app.registration.model.api.IUser
+import am.chamich.app.registration.models.api.IUser
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle

@@ -1,6 +1,6 @@
-package am.chamich.app.registration.model
+package am.chamich.app.registration.models
 
-import am.chamich.app.registration.model.api.IUser
+import am.chamich.app.registration.models.api.IUser
 
 internal data class User(
     override val id: String,

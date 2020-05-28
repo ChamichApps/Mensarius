@@ -1,4 +1,4 @@
-package am.chamich.app.registration.model.api
+package am.chamich.app.registration.models.api
 
 internal interface IUser {
     val id: String

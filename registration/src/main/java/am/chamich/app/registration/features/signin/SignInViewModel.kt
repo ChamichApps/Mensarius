@@ -2,7 +2,7 @@ package am.chamich.app.registration.features.signin
 
 import am.chamich.app.registration.core.CoreViewModel
 import am.chamich.app.registration.exceptions.Failure
-import am.chamich.app.registration.model.api.IUser
+import am.chamich.app.registration.models.api.IUser
 import am.chamich.app.registration.network.api.IAuthenticator
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

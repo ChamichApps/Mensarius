@@ -1,7 +1,7 @@
 package am.chamich.app.registration.network.api
 
 import am.chamich.app.registration.exceptions.Failure
-import am.chamich.app.registration.model.api.IUser
+import am.chamich.app.registration.models.api.IUser
 
 internal interface IAuthenticator {
 

@@ -8,7 +8,7 @@ import am.chamich.app.registration.features.EXTRA_USER_ID
 import am.chamich.app.registration.features.EXTRA_USER_NAME
 import am.chamich.app.registration.features.RESULT_SIGN_UP_SUCCESS
 import am.chamich.app.registration.helpers.*
-import am.chamich.app.registration.model.api.IUser
+import am.chamich.app.registration.models.api.IUser
 import am.chamich.app.registration.navigation.api.INavigator
 import android.content.Intent
 import androidx.fragment.app.Fragment

@@ -1,9 +1,9 @@
 package am.chamich.app.registration.network
 
 import am.chamich.app.registration.exceptions.Failure
-import am.chamich.app.registration.model.UnknownUser
-import am.chamich.app.registration.model.User
-import am.chamich.app.registration.model.api.IUser
+import am.chamich.app.registration.models.UnknownUser
+import am.chamich.app.registration.models.User
+import am.chamich.app.registration.models.api.IUser
 import am.chamich.app.registration.network.api.IAuthenticator
 import android.content.Context
 import android.util.Log

@@ -27,10 +27,10 @@ internal abstract class CoreFragment<T : ViewDataBinding> : Fragment() {
     @Inject
     internal lateinit var navigator: INavigator
 
+    protected abstract var layoutId: Int
+
     protected lateinit var binding: T
     protected var toast: Toast? = null
-
-    protected abstract var layoutId: Int
 
     protected val registrationComponent: RegistrationComponent? by lazy(mode = LazyThreadSafetyMode.NONE) {
         (requireActivity() as? RegistrationActivity)?.registrationComponent
