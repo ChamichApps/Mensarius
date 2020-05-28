@@ -112,7 +112,7 @@ class SignUpFragmentTest {
 
         val slot = mocks.slot<Intent>()
         mocks.coVerify(times = 1) {
-            mockedNavigator.finishActivityWithResult(RESULT_SIGN_UP_SUCCESS, capture(slot))
+            mockedNavigator.finishActivityWithResult(any(), RESULT_SIGN_UP_SUCCESS, capture(slot))
         }
 
         assertions.assertThat(slot.captured.getStringExtra(EXTRA_USER_ID), `is`(USER_ID))

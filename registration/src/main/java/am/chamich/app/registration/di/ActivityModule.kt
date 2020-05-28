@@ -4,7 +4,6 @@ import am.chamich.app.registration.navigation.Navigator
 import am.chamich.app.registration.navigation.api.INavigator
 import am.chamich.app.registration.network.FirebaseAuthenticator
 import am.chamich.app.registration.network.api.IAuthenticator
-import android.app.Activity
 import android.content.Context
 import com.google.firebase.auth.FirebaseAuth
 import dagger.Module
@@ -13,8 +12,7 @@ import javax.inject.Singleton
 
 @Module
 class ActivityModule(
-    private val context: Context,
-    private val activity: Activity
+    private val context: Context
 ) {
 
     @Singleton
@@ -23,7 +21,7 @@ class ActivityModule(
 
     @Singleton
     @Provides
-    fun provideNavigator(): INavigator = Navigator(activity)
+    fun provideNavigator(): INavigator = Navigator()
 
     @Singleton
     @Provides

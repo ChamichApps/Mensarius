@@ -41,7 +41,10 @@ class SignInFragment : CoreFragment<RegistrationFragmentSignInBinding>() {
 
     private fun handleSignInSuccess(user: IUser?) {
         hideProgress()
-        navigator.finishActivityWithResult(RESULT_SIGN_IN_SUCCESS, Intent().apply {
+        navigator.finishActivityWithResult(
+            requireActivity(),
+            RESULT_SIGN_IN_SUCCESS,
+            Intent().apply {
             putExtra(EXTRA_USER_ID, user?.id)
             putExtra(EXTRA_USER_EMAIL, user?.email)
             putExtra(EXTRA_USER_NAME, user?.name)
