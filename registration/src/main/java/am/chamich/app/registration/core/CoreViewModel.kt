@@ -4,7 +4,7 @@ import am.chamich.app.registration.exceptions.Failure
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-abstract class CoreViewModel : ViewModel() {
+internal abstract class CoreViewModel : ViewModel() {
 
     protected val failure: MutableLiveData<Failure> = MutableLiveData()
 

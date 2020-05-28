@@ -11,7 +11,7 @@ import dagger.Provides
 import javax.inject.Singleton
 
 @Module
-class ActivityModule(
+internal class RegistrationModule(
     private val context: Context
 ) {
 

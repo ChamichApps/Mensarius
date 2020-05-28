@@ -8,7 +8,7 @@ import android.content.Context
 import android.os.Bundle
 import android.view.View
 
-class HomeFragment : CoreFragment<RegistrationFragmentHomeBinding>() {
+internal class HomeFragment : CoreFragment<RegistrationFragmentHomeBinding>() {
 
     private lateinit var viewModelHome: HomeViewModel
 
@@ -16,7 +16,7 @@ class HomeFragment : CoreFragment<RegistrationFragmentHomeBinding>() {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        activityComponent?.inject(this)
+        registrationComponent?.inject(this)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

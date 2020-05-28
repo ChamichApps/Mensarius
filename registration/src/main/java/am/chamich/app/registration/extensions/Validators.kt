@@ -13,10 +13,10 @@ private const val EMAIL_PATTERN =
 private const val PASSWORD_PATTERN = "^(?=.*[0-9])(?=.*[A-Z])(?=.*[@#$%^&+=!])(?=\\S+$).{4,}$"
 private const val PASSWORD_ALLOWED_LENGTH = 6
 
-val String.isValidEmail
+internal val String.isValidEmail
     get() = compile(EMAIL_PATTERN).matcher(this).matches()
 
-val String.isValidPassword: Boolean
+internal val String.isValidPassword: Boolean
     get() = compile(PASSWORD_PATTERN)
         .matcher(this).matches() && this.length >= PASSWORD_ALLOWED_LENGTH
 

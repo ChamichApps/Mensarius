@@ -1,11 +1,9 @@
 package am.chamich.app.registration.features
 
 import am.chamich.app.registration.R
-import am.chamich.app.registration.di.ActivityComponent
-import am.chamich.app.registration.di.ActivityModule
-import am.chamich.app.registration.di.DaggerActivityComponent
-import android.app.Activity
-import android.content.Intent
+import am.chamich.app.registration.di.DaggerRegistrationComponent
+import am.chamich.app.registration.di.RegistrationComponent
+import am.chamich.app.registration.di.RegistrationModule
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
@@ -23,16 +21,20 @@ const val EXTRA_USER_ID = "am.chamich.app.registration.EXTRA_USER_ID"
 const val EXTRA_USER_EMAIL = "am.chamich.app.registration.EXTRA_USER_EMAIL"
 const val EXTRA_USER_NAME = "am.chamich.app.registration.EXTRA_USER_NAME"
 
-class RegistrationActivity : AppCompatActivity(), AppBarConfiguration.OnNavigateUpListener {
+internal class RegistrationActivity : AppCompatActivity(),
+    AppBarConfiguration.OnNavigateUpListener {
 
     private lateinit var progressView: View
     private lateinit var navController: NavController
 
-    val activityComponent: ActivityComponent by lazy(mode = LazyThreadSafetyMode.NONE) {
-        DaggerActivityComponent
-            .builder()
-            .activityModule(ActivityModule(applicationContext, this))
-            .build()
+    val registrationComponent: RegistrationComponent? by lazy(mode = LazyThreadSafetyMode.NONE) {
+        if (REGISTRATION_COMPONENT == null) {
+            // THIS BLOCK IS USED FOR INTEGRATION TESTS ONLY
+            DaggerRegistrationComponent
+                .builder()
+                .registrationModule(RegistrationModule(applicationContext))
+                .build()
+        } else REGISTRATION_COMPONENT
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -75,10 +77,6 @@ class RegistrationActivity : AppCompatActivity(), AppBarConfiguration.OnNavigate
     }
 
     companion object {
-        fun startActivityForResult(activity: Activity) {
-            activity.startActivityForResult(
-                Intent(activity, RegistrationActivity::class.java), REQUEST_CODE_REGISTRATION
-            )
-        }
+        var REGISTRATION_COMPONENT: RegistrationComponent? = null
     }
 }

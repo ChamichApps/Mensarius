@@ -1,7 +1,7 @@
 package am.chamich.app.registration.core
 
 import am.chamich.app.registration.R
-import am.chamich.app.registration.di.ActivityComponent
+import am.chamich.app.registration.di.RegistrationComponent
 import am.chamich.app.registration.extensions.isValidEmail
 import am.chamich.app.registration.extensions.isValidPassword
 import am.chamich.app.registration.extensions.textAsString
@@ -19,7 +19,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.textfield.TextInputLayout
 import javax.inject.Inject
 
-abstract class CoreFragment<T : ViewDataBinding> : Fragment() {
+internal abstract class CoreFragment<T : ViewDataBinding> : Fragment() {
 
     @Inject
     internal lateinit var viewModelFactory: ViewModelProvider.Factory
@@ -32,8 +32,8 @@ abstract class CoreFragment<T : ViewDataBinding> : Fragment() {
 
     protected abstract var layoutId: Int
 
-    protected val activityComponent: ActivityComponent? by lazy(mode = LazyThreadSafetyMode.NONE) {
-        (requireActivity() as? RegistrationActivity)?.activityComponent
+    protected val registrationComponent: RegistrationComponent? by lazy(mode = LazyThreadSafetyMode.NONE) {
+        (requireActivity() as? RegistrationActivity)?.registrationComponent
     }
 
     override fun onCreateView(

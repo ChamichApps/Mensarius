@@ -11,7 +11,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
-class RestorePasswordViewModel @Inject constructor(
+internal class RestorePasswordViewModel @Inject constructor(
     private val authenticator: IAuthenticator
 ) : CoreViewModel() {
 

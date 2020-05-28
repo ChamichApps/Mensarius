@@ -6,7 +6,7 @@ import android.content.Intent
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.NavHostFragment.findNavController
 
-class Navigator : INavigator {
+internal class Navigator : INavigator {
 
     override fun finishActivityWithResult(activity: Activity, result: Int, intent: Intent) {
         activity.setResult(result, intent)

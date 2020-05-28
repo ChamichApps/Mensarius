@@ -15,7 +15,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 
-class SignUpFragment : CoreFragment<RegistrationFragmentSignUpBinding>() {
+internal class SignUpFragment : CoreFragment<RegistrationFragmentSignUpBinding>() {
 
     private lateinit var signUpViewModel: SignUpViewModel
 
@@ -23,7 +23,7 @@ class SignUpFragment : CoreFragment<RegistrationFragmentSignUpBinding>() {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        activityComponent?.inject(this)
+        registrationComponent?.inject(this)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

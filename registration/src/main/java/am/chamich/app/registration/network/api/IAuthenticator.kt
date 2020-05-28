@@ -3,7 +3,7 @@ package am.chamich.app.registration.network.api
 import am.chamich.app.registration.exceptions.Failure
 import am.chamich.app.registration.model.api.IUser
 
-interface IAuthenticator {
+internal interface IAuthenticator {
 
     /**
      * Sign In with provided email and password
@@ -22,4 +22,15 @@ interface IAuthenticator {
      */
     @Throws(Failure.PasswordRecoveryException::class)
     suspend fun restorePassword(email: String): String
+
+    /**
+     * Checks if used is Signed In
+     * @return true is signed in; otherwise false
+     */
+    fun isSignedIn(): Boolean
+
+    /**
+     * Initiates Sign Out process
+     */
+    fun signOut()
 }

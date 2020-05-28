@@ -10,7 +10,7 @@ import android.util.Log
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.tasks.await
 
-class FirebaseAuthenticator(
+internal class FirebaseAuthenticator(
     private val context: Context,
     private val authenticator: FirebaseAuth
 ) : IAuthenticator {
@@ -62,6 +62,18 @@ class FirebaseAuthenticator(
         } catch (exception: Exception) {
             throw Failure.PasswordRecoveryException(exception.localizedMessage)
         }
+    }
+
+    override fun isSignedIn(): Boolean {
+        Log.d(TAG, "|----------------------| Is Signed In |---------------------|")
+        val isSignedIn = authenticator.currentUser != null
+        Log.d(TAG, "|---- User Signed In: $isSignedIn")
+        return isSignedIn
+    }
+
+    override fun signOut() {
+        Log.d(TAG, "|------------------------| Sign Out |-----------------------|")
+        authenticator.signOut()
     }
 
     companion object {

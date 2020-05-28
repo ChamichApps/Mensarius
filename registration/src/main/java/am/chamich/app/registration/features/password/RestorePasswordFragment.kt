@@ -12,7 +12,8 @@ import android.content.Context
 import android.os.Bundle
 import android.view.View
 
-class RestorePasswordFragment : CoreFragment<RegistrationFragmentRestorePasswordBinding>() {
+internal class RestorePasswordFragment :
+    CoreFragment<RegistrationFragmentRestorePasswordBinding>() {
 
     private lateinit var restorePasswordViewModel: RestorePasswordViewModel
 
@@ -20,7 +21,7 @@ class RestorePasswordFragment : CoreFragment<RegistrationFragmentRestorePassword
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        activityComponent?.inject(this)
+        registrationComponent?.inject(this)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

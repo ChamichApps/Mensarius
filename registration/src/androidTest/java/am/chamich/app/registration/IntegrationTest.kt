@@ -17,7 +17,7 @@ class IntegrationTest {
 
     @Rule
     @JvmField
-    var activityTestRule = ActivityTestRule(RegistrationActivity::class.java)
+    internal var activityTestRule = ActivityTestRule(RegistrationActivity::class.java)
 
     @Test
     fun navigateToSignIn() {

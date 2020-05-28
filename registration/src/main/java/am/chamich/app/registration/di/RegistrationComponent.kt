@@ -1,5 +1,6 @@
 package am.chamich.app.registration.di
 
+import am.chamich.app.registration.Registration
 import am.chamich.app.registration.di.viewmodel.ViewModelModule
 import am.chamich.app.registration.features.home.HomeFragment
 import am.chamich.app.registration.features.password.RestorePasswordFragment
@@ -11,11 +12,13 @@ import javax.inject.Singleton
 @Singleton
 @Component(
     modules = [
-        ActivityModule::class,
+        RegistrationModule::class,
         ViewModelModule::class
     ]
 )
-interface ActivityComponent {
+internal interface RegistrationComponent {
+
+    fun inject(registration: Registration)
 
     fun inject(fragment: HomeFragment)
     fun inject(fragment: SignInFragment)
