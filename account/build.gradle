@@ -34,7 +34,7 @@ android {
     }
 
     dataBinding {
-        enabled true
+        buildFeatures.dataBinding true
     }
 
     resourcePrefix  "account_"
@@ -71,4 +71,5 @@ dependencies {
     androidTestImplementation "androidx.room:room-testing:2.2.5"
 
     kaptAndroidTest "androidx.databinding:databinding-compiler:4.0.0"
+    kaptAndroidTest "androidx.room:room-compiler:2.2.5"
 }

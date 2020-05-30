@@ -33,7 +33,7 @@ android {
     }
 
     dataBinding {
-        enabled true
+        buildFeatures.dataBinding true
     }
 
     resourcePrefix  "registration_"
