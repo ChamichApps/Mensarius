@@ -52,9 +52,13 @@ dependencies {
     testImplementation 'junit:junit:4.12'
 
     implementation 'com.google.dagger:dagger:2.22'
+    implementation "androidx.room:room-runtime:2.2.5"
+    implementation "androidx.room:room-ktx:2.2.5"
+
 
     kapt 'com.google.dagger:dagger-compiler:2.22'
     kapt "com.android.databinding:compiler:3.6.3"
+    kapt "androidx.room:room-compiler:2.2.5"
 
     // Android Testing
     debugImplementation 'androidx.fragment:fragment-testing:1.2.4'
@@ -64,6 +68,7 @@ dependencies {
     androidTestImplementation "androidx.test:runner:1.2.0"
     androidTestImplementation "androidx.test.espresso:espresso-core:3.2.0"
     androidTestImplementation "io.mockk:mockk-android:1.10.0"
+    androidTestImplementation "androidx.room:room-testing:2.2.5"
 
     kaptAndroidTest "androidx.databinding:databinding-compiler:4.0.0"
 }
