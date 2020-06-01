@@ -2,6 +2,7 @@ package am.chamich.app.account.core
 
 import am.chamich.app.account.di.AccountComponent
 import am.chamich.app.account.features.AccountsActivity
+import am.chamich.app.account.navigation.api.INavigator
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -15,7 +16,10 @@ import javax.inject.Inject
 internal abstract class CoreFragment<T : ViewDataBinding> : Fragment() {
 
     @Inject
-    internal lateinit var viewModelFactory: ViewModelProvider.Factory
+    lateinit var viewModelFactory: ViewModelProvider.Factory
+
+    @Inject
+    lateinit var navigator: INavigator
 
     protected abstract var layoutId: Int
 

@@ -1,10 +1,10 @@
-package am.chamich.app.account.database
+package am.chamich.app.account.database.api
 
 import am.chamich.app.account.database.entity.AccountEntity
 import androidx.room.*
 
 @Dao
-interface AccountsDao {
+internal interface IAccountsDatabase {
 
     @Insert
     fun insertAccount(account: AccountEntity): Long
@@ -19,5 +19,5 @@ interface AccountsDao {
     fun queryAccount(id: Long): AccountEntity
 
     @Query("SELECT * FROM accounts")
-    fun queryAllAccounts(): List<AccountEntity>
+    fun queryAccounts(): List<AccountEntity>
 }

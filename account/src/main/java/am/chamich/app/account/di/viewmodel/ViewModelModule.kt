@@ -1,6 +1,8 @@
 package am.chamich.app.account.di.viewmodel
 
 import am.chamich.app.account.features.accounts.AccountsViewModel
+import am.chamich.app.account.features.add.AddAccountViewModel
+import am.chamich.app.account.features.edit.EditAccountViewModel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import dagger.Binds
@@ -16,5 +18,15 @@ internal abstract class ViewModelModule {
     @Binds
     @IntoMap
     @ViewModelKey(AccountsViewModel::class)
-    abstract fun bindsAccountsViewModel(accountsViewModel: AccountsViewModel): ViewModel
+    abstract fun bindsAccountsViewModel(viewModel: AccountsViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(AddAccountViewModel::class)
+    abstract fun bindsAddAccountViewModel(viewModel: AddAccountViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(EditAccountViewModel::class)
+    abstract fun bindsEditAccountViewModel(viewModel: EditAccountViewModel): ViewModel
 }

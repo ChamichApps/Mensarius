@@ -1,26 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
         <variable
             name="account"
-            type="am.chamich.app.account.models.api.IAccount" />
+            type="am.chamich.app.account.features.accounts.adapters.AccountsAdapter.AccountUi" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <TextView
+        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/textview_name"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
             android:text="@{account.name}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/view_account"
+            app:layout_constraintTop_toTopOf="@+id/view_account"
+            tools:text="COMMERZ BANK" />
+
+        <View
+            android:id="@+id/view_account"
+            android:layout_width="46dp"
+            android:layout_height="46dp"
+            android:layout_margin="8dp"
+            android:background="@{account.color}"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/textview_type"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="@{account.type}"
+            app:layout_constraintBottom_toBottomOf="@+id/view_account"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/view_account"
+            tools:text="Credit Card" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

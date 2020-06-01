@@ -5,27 +5,27 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity(tableName = "accounts")
-data class AccountEntity(
+internal data class AccountEntity(
 
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "account_id")
-    private val id: Long,
+    val id: Long = 0L,
 
     @ColumnInfo(name = "account_name")
-    private val accountName: String,
+    val name: String,
 
     @ColumnInfo(name = "bank_account_number")
-    private val accountNumber: String,
+    val number: String,
 
     @ColumnInfo(name = "account_type")
-    private val accountType: Int,
+    val type: Int,
 
     @ColumnInfo(name = "initial_value")
-    private val initialValue: Long,
+    val value: Long,
 
     @ColumnInfo(name = "currency")
-    private val currency: Int,
+    val currency: Int,
 
     @ColumnInfo(name = "color")
-    private val color: Int
+    val color: Int
 )

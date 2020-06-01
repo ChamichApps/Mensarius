@@ -2,8 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="am.chamich.app.account">
 
-    <application>
-        <activity android:name=".features.AccountsActivity"></activity>
+    <application android:theme="@style/Theme.MaterialComponents.Light.NoActionBar">
+        <activity android:name=".features.AccountsActivity" />
     </application>
 
 </manifest>

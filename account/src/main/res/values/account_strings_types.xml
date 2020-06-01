@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+    <string name="account_type_general">General</string>
+    <string name="account_type_current">Current Account</string>
+    <string name="account_type_cash">Cash</string>
+    <string name="account_type_credit_card">Credit Card</string>
+    <string name="account_type_saving">Saving</string>
+    <string name="account_type_bonus">Bonus</string>
+    <string name="account_type_insurance">Insurance</string>
+    <string name="account_type_investment">Investment</string>
+    <string name="account_type_loan">Loan</string>
+    <string name="account_type_mortgage">Mortgage</string>
+    <string name="account_type_overdraft">Overdraft</string>
+</resources>
