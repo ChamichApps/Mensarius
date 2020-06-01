@@ -13,7 +13,7 @@ import javax.inject.Inject
 
 class Registration(context: Context) {
 
-    private val registrationComponent: RegistrationComponent = DaggerRegistrationComponent
+    private val registrationComponent: RegistrationComponent? = DaggerRegistrationComponent
         .builder()
         .registrationModule(RegistrationModule(context))
         .build()
@@ -22,7 +22,7 @@ class Registration(context: Context) {
     internal lateinit var authenticator: IAuthenticator
 
     init {
-        registrationComponent.inject(this)
+        registrationComponent?.inject(this)
     }
 
     fun startRegistrationActivityForResult(activity: Activity) {

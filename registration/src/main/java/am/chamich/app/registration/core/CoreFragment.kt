@@ -22,10 +22,10 @@ import javax.inject.Inject
 internal abstract class CoreFragment<T : ViewDataBinding> : Fragment() {
 
     @Inject
-    internal lateinit var viewModelFactory: ViewModelProvider.Factory
+    lateinit var viewModelFactory: ViewModelProvider.Factory
 
     @Inject
-    internal lateinit var navigator: INavigator
+    lateinit var navigator: INavigator
 
     protected abstract var layoutId: Int
 
