@@ -2,13 +2,15 @@
 
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/account_navigation"
     app:startDestination="@id/destination_fragment_accounts">
 
     <fragment
         android:id="@+id/destination_fragment_accounts"
         android:name="am.chamich.app.account.features.accounts.AccountsFragment"
-        android:label="AccountsFragment">
+        android:label="AccountsFragment"
+        tools:layout="@layout/account_fragment_accounts">
         <action
             android:id="@+id/account_action_account_accountsfragment_to_account_addaccountfragment"
             app:destination="@id/destination_fragment_add_account" />
@@ -19,9 +21,11 @@
     <fragment
         android:id="@+id/destination_fragment_add_account"
         android:name="am.chamich.app.account.features.add.AddAccountFragment"
-        android:label="AddAccountFragment" />
+        android:label="AddAccountFragment"
+        tools:layout="@layout/account_fragment_add_account" />
     <fragment
         android:id="@+id/destination_fragment_edit_account"
         android:name="am.chamich.app.account.features.edit.EditAccountFragment"
-        android:label="EditAccountFragment" />
+        android:label="EditAccountFragment"
+        tools:layout="@layout/account_fragment_edit_account" />
 </navigation>

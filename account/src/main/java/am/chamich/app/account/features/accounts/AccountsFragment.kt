@@ -37,6 +37,7 @@ internal class AccountsFragment : CoreFragment<AccountFragmentAccountsBinding>()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.listener = ClickListeners()
         accountsViewModel.loadAccounts()
         initializeRecyclerView()
     }
@@ -61,5 +62,11 @@ internal class AccountsFragment : CoreFragment<AccountFragmentAccountsBinding>()
                 AccountColor.from(accountEntity.color).asColorResource
             )
         } ?: emptyList())
+    }
+
+    inner class ClickListeners {
+        fun onAddAccountClicked() {
+            navigator.navigate(this@AccountsFragment, R.id.destination_fragment_add_account)
+        }
     }
 }
