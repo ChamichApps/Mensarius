@@ -16,6 +16,7 @@ import androidx.fragment.app.testing.launchFragmentInContainer
 import androidx.lifecycle.MutableLiveData
 import io.mockk.every
 import io.mockk.mockk
+import org.junit.Before
 import org.junit.Test
 
 class EditAccountFragmentTest {
@@ -29,14 +30,16 @@ class EditAccountFragmentTest {
         every { loadedAccount } returns loadedAccountLiveData
     }
 
-    @Test
-    fun when_UserClicksOnTypeSelector_then_CorrectTypeIsSelected() {
+    @Before
+    fun setup() {
         every { mockedViewModel.loadAccount(any()) } answers {
             loadedAccountLiveData.postValue(createAccount())
         }
-
         launchFragment()
+    }
 
+    @Test
+    fun when_UserClicksOnTypeSelector_then_CorrectTypeIsSelected() {
         TypeModel.values().forEach { type ->
             actions.performClick(R.id.edittext_account_type)
             matchers.isTextInPopupDisplayed(type.stringResource)
@@ -48,12 +51,6 @@ class EditAccountFragmentTest {
 
     @Test
     fun when_UserClicksOnColorSelector_then_CorrectColorIsSelected() {
-        every { mockedViewModel.loadAccount(any()) } answers {
-            loadedAccountLiveData.postValue(createAccount())
-        }
-
-        launchFragment()
-
         ColorModel.values().forEach { color ->
             actions.performClick(R.id.edittext_account_color)
             matchers.isTextInPopupDisplayed(color.colorResource)
@@ -66,12 +63,6 @@ class EditAccountFragmentTest {
 
     @Test
     fun when_UserSelectsAccount_then_AccountDataIsShown() {
-        every { mockedViewModel.loadAccount(any()) } answers {
-            loadedAccountLiveData.postValue(createAccount())
-        }
-
-        launchFragment()
-
         matchers.viewIsDisplayedAndContainsText(DEFAULT_ACCOUNT_NAME)
         matchers.viewIsDisplayedAndContainsText(DEFAULT_ACCOUNT_NUMBER)
         matchers.viewIsDisplayedAndContainsText(TypeModel.from(DEFAULT_ACCOUNT_TYPE).stringResource)
