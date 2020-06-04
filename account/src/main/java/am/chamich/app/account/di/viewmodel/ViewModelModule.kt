@@ -1,8 +1,8 @@
 package am.chamich.app.account.di.viewmodel
 
 import am.chamich.app.account.features.accounts.AccountsViewModel
-import am.chamich.app.account.features.add.AddAccountViewModel
-import am.chamich.app.account.features.edit.EditAccountViewModel
+import am.chamich.app.account.features.modify.add.AddAccountViewModel
+import am.chamich.app.account.features.modify.edit.EditAccountViewModel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import dagger.Binds

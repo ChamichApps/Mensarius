@@ -7,7 +7,9 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.BoundedMatcher
+import androidx.test.espresso.matcher.RootMatchers.isPlatformPopup
 import androidx.test.espresso.matcher.ViewMatchers.*
+import org.hamcrest.CoreMatchers.not
 import org.hamcrest.Description
 import org.hamcrest.Matcher
 
@@ -22,6 +24,24 @@ class Matchers {
     fun a(@IdRes resourceId: Int, position: Int, @StringRes stringResource: Int) {
         onView(withId(resourceId))
             .check(matches(atPosition(position, hasDescendant(withText(stringResource)))))
+    }
+
+    fun isTextInPopupDisplayed(@StringRes stringResource: Int) {
+        onView(withText(stringResource))
+            .inRoot(isPlatformPopup())
+            .check(matches(isDisplayed()))
+    }
+
+    fun viewIsDisplayedAndContainsText(@StringRes stringResource: Int) {
+        onView(withText(stringResource)).check(matches(isDisplayed()))
+    }
+
+    fun viewIsDisplayedAndContainsText(text: String) {
+        onView(withText(text)).check(matches(isDisplayed()))
+    }
+
+    fun viewIsDisplayedContainsTextAndDisabled(@StringRes stringResource: Int) {
+        onView(withText(stringResource)).check(matches(not(isEnabled())))
     }
 
 
@@ -41,4 +61,6 @@ class Matchers {
             }
         }
     }
+
+
 }

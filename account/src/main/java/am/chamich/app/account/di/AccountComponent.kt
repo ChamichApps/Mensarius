@@ -2,8 +2,8 @@ package am.chamich.app.account.di
 
 import am.chamich.app.account.di.viewmodel.ViewModelModule
 import am.chamich.app.account.features.accounts.AccountsFragment
-import am.chamich.app.account.features.add.AddAccountFragment
-import am.chamich.app.account.features.edit.EditAccountFragment
+import am.chamich.app.account.features.modify.add.AddAccountFragment
+import am.chamich.app.account.features.modify.edit.EditAccountFragment
 import dagger.Component
 import javax.inject.Singleton
 

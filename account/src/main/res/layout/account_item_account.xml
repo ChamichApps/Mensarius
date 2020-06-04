@@ -7,8 +7,8 @@
     <data>
 
         <variable
-            name="account"
-            type="am.chamich.app.account.features.accounts.adapters.AccountsAdapter.AccountUi" />
+            name="accountModel"
+            type="am.chamich.app.account.models.api.IAccountModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -20,7 +20,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:text="@{account.name}"
+            android:text="@{accountModel.name}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/view_account"
             app:layout_constraintTop_toTopOf="@+id/view_account"
@@ -31,7 +31,7 @@
             android:layout_width="46dp"
             android:layout_height="46dp"
             android:layout_margin="8dp"
-            android:background="@{account.color}"
+            android:background="@{accountModel.colorModel.colorResource}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -41,7 +41,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:text="@{account.type}"
+            android:text="@{accountModel.typeModel.stringResource}"
             app:layout_constraintBottom_toBottomOf="@+id/view_account"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/view_account"

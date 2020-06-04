@@ -1,4 +1,4 @@
-package am.chamich.app.account.features.add
+package am.chamich.app.account.features.modify.add
 
 import am.chamich.app.account.R
 import am.chamich.app.account.core.CoreFragment

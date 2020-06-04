@@ -2,11 +2,10 @@ package am.chamich.app.account.features.accounts
 
 import am.chamich.app.account.R
 import am.chamich.app.account.database.entity.AccountEntity
-import am.chamich.app.account.extensions.asStringResource
 import am.chamich.app.account.helpers.Matchers
 import am.chamich.app.account.helpers.ViewModelFactory
-import am.chamich.app.account.models.AccountColor
-import am.chamich.app.account.models.AccountType
+import am.chamich.app.account.helpers.createAccount
+import am.chamich.app.account.models.TypeModel
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentFactory
 import androidx.fragment.app.testing.FragmentScenario
@@ -29,15 +28,20 @@ internal class AccountsFragmentTest {
     @Test
     fun when_UserHasTwoAccounts_then_TwoAccountsAreShownInTheList() {
         every { mockedViewModel.loadAccounts() } answers {
-            loadedAccountsLiveData.postValue(listOf(ACCOUNT_1, ACCOUNT_2))
+            loadedAccountsLiveData.postValue(
+                listOf(
+                    createAccount(name = ACCOUNT_1_NAME, type = ACCOUNT_1_TYPE.id),
+                    createAccount(name = ACCOUNT_2_NAME, type = ACCOUNT_2_TYPE.id)
+                )
+            )
         }
 
         launchFragment()
 
-        matchers.a(R.id.recyclerview_accounts, 0, "Account 1")
-        matchers.a(R.id.recyclerview_accounts, 0, AccountType.SAVING.asStringResource)
-        matchers.a(R.id.recyclerview_accounts, 1, "Account 2")
-        matchers.a(R.id.recyclerview_accounts, 1, AccountType.CURRENT.asStringResource)
+        matchers.a(R.id.recyclerview_accounts, 0, ACCOUNT_1_NAME)
+        matchers.a(R.id.recyclerview_accounts, 0, ACCOUNT_1_TYPE.stringResource)
+        matchers.a(R.id.recyclerview_accounts, 1, ACCOUNT_2_NAME)
+        matchers.a(R.id.recyclerview_accounts, 1, ACCOUNT_2_TYPE.stringResource)
     }
 
 
@@ -53,24 +57,9 @@ internal class AccountsFragmentTest {
     }
 
     companion object {
-        val ACCOUNT_1 = AccountEntity(
-            1,
-            "Account 1",
-            "5729263537383030263",
-            AccountType.SAVING.id,
-            5000,
-            0,
-            AccountColor.RED.id
-        )
-
-        val ACCOUNT_2 = AccountEntity(
-            2,
-            "Account 2",
-            "739393736367393344",
-            AccountType.CURRENT.id,
-            9000,
-            0,
-            AccountColor.RED.id
-        )
+        const val ACCOUNT_1_NAME = "Account 1"
+        const val ACCOUNT_2_NAME = "Account 2"
+        val ACCOUNT_1_TYPE = TypeModel.CURRENT
+        val ACCOUNT_2_TYPE = TypeModel.SAVING
     }
 }

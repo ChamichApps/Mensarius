@@ -12,20 +12,24 @@
         android:label="AccountsFragment"
         tools:layout="@layout/account_fragment_accounts">
         <action
-            android:id="@+id/account_action_account_accountsfragment_to_account_addaccountfragment"
+            android:id="@+id/action_to_add_account_fragment"
             app:destination="@id/destination_fragment_add_account" />
         <action
-            android:id="@+id/account_action_account_accountsfragment_to_account_editaccountfragment"
+            android:id="@+id/action_to_edit_account_fragment"
             app:destination="@id/destination_fragment_edit_account" />
     </fragment>
     <fragment
         android:id="@+id/destination_fragment_add_account"
-        android:name="am.chamich.app.account.features.add.AddAccountFragment"
+        android:name="am.chamich.app.account.features.modify.add.AddAccountFragment"
         android:label="AddAccountFragment"
-        tools:layout="@layout/account_fragment_add_account" />
+        tools:layout="@layout/account_fragment_add_account"></fragment>
     <fragment
         android:id="@+id/destination_fragment_edit_account"
-        android:name="am.chamich.app.account.features.edit.EditAccountFragment"
+        android:name="am.chamich.app.account.features.modify.edit.EditAccountFragment"
         android:label="EditAccountFragment"
-        tools:layout="@layout/account_fragment_edit_account" />
+        tools:layout="@layout/account_fragment_edit_account">
+        <argument
+            android:name="accountId"
+            app:argType="long" />
+    </fragment>
 </navigation>
