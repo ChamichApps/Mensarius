@@ -47,7 +47,7 @@ internal class EditAccountFragmentTest {
     }
 
     @Test
-    fun when_UserClicksOnTypeSelector_then_CorrectTypeIsSelected() {
+    fun when_UserSwitchesAccountTypes_then_UserInterfaceReactsOnChanges() {
         TypeModel.values().forEach { type ->
             actions.performClick(R.id.edittext_account_type)
             matchers.isTextInPopupDisplayed(type.stringResource)
@@ -58,7 +58,7 @@ internal class EditAccountFragmentTest {
     }
 
     @Test
-    fun when_UserClicksOnColorSelector_then_CorrectColorIsSelected() {
+    fun when_UserSwitchesColors_then_UserInterfaceReactsOnChanges() {
         ColorModel.values().forEach { color ->
             actions.performClick(R.id.edittext_account_color)
             matchers.isTextInPopupDisplayed(color.colorResource)

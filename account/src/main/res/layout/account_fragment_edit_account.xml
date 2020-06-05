@@ -6,7 +6,6 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <variable
             name="accountModel"
             type="am.chamich.app.account.models.api.IAccountModel" />

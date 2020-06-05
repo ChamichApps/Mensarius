@@ -8,5 +8,6 @@
     <string name="account_hint_account_type">Type</string>
     <string name="account_hint_account_currency">Currency</string>
     <string name="account_hint_account_color">Color</string>
+    <string name="account_hint_account_initial_value">Initial value</string>
 
 </resources>

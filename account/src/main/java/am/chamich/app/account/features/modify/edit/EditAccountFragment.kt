@@ -78,16 +78,20 @@ internal class EditAccountFragment : CoreFragment<AccountFragmentEditAccountBind
         return super.onOptionsItemSelected(item)
     }
 
-    private fun onAccountTypeClicked(typeModel: TypeModel) {
-        binding.edittextAccountType.setText(typeModel.stringResource)
-        binding.edittextAccountType.dismissDropDown()
-        currentType = typeModel
+    private fun onTypeChanged(newType: TypeModel?) {
+        newType?.let {
+            binding.edittextAccountType.setText(it.stringResource)
+            binding.edittextAccountType.dismissDropDown()
+            currentType = it
+        }
     }
 
-    private fun onAccountColorClicked(colorModel: ColorModel) {
-        binding.viewColor.accountColor = colorModel
-        binding.edittextAccountColor.dismissDropDown()
-        currentColor = colorModel
+    private fun onColorChanged(newColor: ColorModel?) {
+        newColor?.let {
+            binding.viewColor.accountColor = it
+            binding.edittextAccountColor.dismissDropDown()
+            currentColor = it
+        }
     }
 
     private fun handleLoadedAccount(accountEntity: AccountEntity?) {
@@ -103,13 +107,13 @@ internal class EditAccountFragment : CoreFragment<AccountFragmentEditAccountBind
 
     private fun initializeAdapters() {
         (binding.edittextAccountType as? AutoCompleteTextView)?.setAdapter(
-            TypeAdapter(requireContext()) { selectedType ->
-                onAccountTypeClicked(selectedType)
+            TypeAdapter(requireContext()) { newType ->
+                onTypeChanged(newType)
             }
         )
         (binding.edittextAccountColor as? AutoCompleteTextView)?.setAdapter(
-            ColorAdapter(requireContext()) { selectedColor ->
-                onAccountColorClicked(selectedColor)
+            ColorAdapter(requireContext()) { newColor ->
+                onColorChanged(newColor)
             }
         )
     }
