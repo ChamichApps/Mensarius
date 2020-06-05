@@ -10,7 +10,7 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.Filter
 
-internal class AccountTypeAdapter(
+internal class TypeAdapter(
     context: Context,
     private val listener: (TypeModel) -> Unit
 ) : ArrayAdapter<TypeModel>(context, R.layout.account_item_account_type, TypeModel.values()) {

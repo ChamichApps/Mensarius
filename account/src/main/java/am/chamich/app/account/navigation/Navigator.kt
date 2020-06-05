@@ -10,4 +10,8 @@ internal class Navigator : INavigator {
     override fun navigate(from: Fragment, direction: NavDirections) {
         findNavController(from).navigate(direction)
     }
+
+    override fun navigateBack(from: Fragment) {
+        findNavController(from).popBackStack()
+    }
 }

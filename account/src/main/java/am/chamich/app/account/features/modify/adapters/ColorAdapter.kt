@@ -10,7 +10,7 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.Filter
 
-internal class AccountColorAdapter(
+internal class ColorAdapter(
     context: Context,
     private val listener: (ColorModel) -> Unit
 ) : ArrayAdapter<ColorModel>(context, R.layout.account_item_account_color, ColorModel.values()) {

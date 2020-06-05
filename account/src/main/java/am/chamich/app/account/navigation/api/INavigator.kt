@@ -6,4 +6,6 @@ import androidx.navigation.NavDirections
 internal interface INavigator {
 
     fun navigate(from: Fragment, direction: NavDirections)
+
+    fun navigateBack(from: Fragment)
 }

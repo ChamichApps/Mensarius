@@ -18,4 +18,12 @@ internal class EditAccountViewModel @Inject constructor(
 
     }
 
+    fun deleteAccount(id: Long) {
+
+    }
+
+    fun saveAccount(accountEntity: AccountEntity) {
+
+    }
+
 }
