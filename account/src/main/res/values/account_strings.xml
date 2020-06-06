@@ -3,6 +3,10 @@
     <string name="account_menu_item_save">Save</string>
     <string name="account_menu_item_delete">Delete</string>
 
+    <string name="account_title_new_account">New Account</string>
+    <string name="account_title_edit_account">Edit Account</string>
+    <string name="account_title_account_settings">Account Settings</string>
+
     <string name="account_hint_account_name">Account name</string>
     <string name="account_hint_bank_account_number">Bank account number</string>
     <string name="account_hint_account_type">Type</string>

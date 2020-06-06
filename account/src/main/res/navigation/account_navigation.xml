@@ -9,7 +9,7 @@
     <fragment
         android:id="@+id/destination_fragment_accounts"
         android:name="am.chamich.app.account.features.accounts.AccountsFragment"
-        android:label="AccountsFragment"
+        android:label="@string/account_title_account_settings"
         tools:layout="@layout/account_fragment_accounts">
         <action
             android:id="@+id/action_to_add_account_fragment"
@@ -21,12 +21,12 @@
     <fragment
         android:id="@+id/destination_fragment_add_account"
         android:name="am.chamich.app.account.features.modify.add.AddAccountFragment"
-        android:label="AddAccountFragment"
-        tools:layout="@layout/account_fragment_add_account"></fragment>
+        android:label="@string/account_title_new_account"
+        tools:layout="@layout/account_fragment_add_account" />
     <fragment
         android:id="@+id/destination_fragment_edit_account"
         android:name="am.chamich.app.account.features.modify.edit.EditAccountFragment"
-        android:label="EditAccountFragment"
+        android:label="@string/account_title_edit_account"
         tools:layout="@layout/account_fragment_edit_account">
         <argument
             android:name="accountId"
