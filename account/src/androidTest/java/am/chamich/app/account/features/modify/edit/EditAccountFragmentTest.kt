@@ -30,17 +30,27 @@ internal class EditAccountFragmentTest {
     private lateinit var fragment: EditAccountFragment
 
     private val loadedAccountLiveData = MutableLiveData<AccountEntity>()
+    private val deletedAccountLiveData = MutableLiveData<Unit>()
+    private val updatedAccountLiveData = MutableLiveData<Unit>()
 
     private val mockedNavigator: INavigator = mockk(relaxed = true)
     private val mockedViewModel: EditAccountViewModel = mockk(relaxed = true) {
         every { loadedAccount } returns loadedAccountLiveData
+        every { loadAccount(any()) } answers {
+            loadedAccountLiveData.postValue(createAccount())
+        }
+        every { updatedAccount } returns updatedAccountLiveData
+        every { updateAccount(any()) } answers {
+            updatedAccountLiveData.postValue(Unit)
+        }
+        every { deletedAccount } returns deletedAccountLiveData
+        every { deleteAccount(any()) } answers {
+            deletedAccountLiveData.postValue(Unit)
+        }
     }
 
     @Before
     fun setup() {
-        every { mockedViewModel.loadAccount(any()) } answers {
-            loadedAccountLiveData.postValue(createAccount())
-        }
         launchFragment()
     }
 
@@ -78,6 +88,8 @@ internal class EditAccountFragmentTest {
 
     @Test
     fun when_UserPressDeletes_then_AccountDeletedAndFragmentNavigatesBack() {
+        actions.enterText(R.id.edittext_account_name, DEFAULT_ACCOUNT_NAME)
+
         fragment.onOptionsItemSelected(mockk(relaxed = true) {
             every { itemId } returns R.id.action_delete
         })

@@ -41,6 +41,8 @@ internal class EditAccountFragment : CoreFragment<AccountFragmentEditAccountBind
         super.onCreate(savedInstanceState)
         editAccountViewModel = viewModel(viewModelFactory) {
             observe(loadedAccount, ::handleLoadedAccount)
+            observe(deletedAccount, ::handleDeletedAccount)
+            observe(updatedAccount, ::handleUpdatedAccount)
         }
     }
 
@@ -49,6 +51,7 @@ internal class EditAccountFragment : CoreFragment<AccountFragmentEditAccountBind
         initializeAdapters()
         setHasOptionsMenu(true)
         binding.accountModel = DefaultAccountModel()
+        showProgress()
         editAccountViewModel.loadAccount(args.accountId)
     }
 
@@ -60,10 +63,11 @@ internal class EditAccountFragment : CoreFragment<AccountFragmentEditAccountBind
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.action_delete -> {
+                showProgress()
                 editAccountViewModel.deleteAccount(args.accountId)
-                navigator.navigateBack(this)
             }
             R.id.action_save -> {
+                showProgress()
                 editAccountViewModel.updateAccount(
                     initialAccountEntity.copy(
                         name = binding.edittextAccountName.textAsString,
@@ -72,7 +76,6 @@ internal class EditAccountFragment : CoreFragment<AccountFragmentEditAccountBind
                         type = currentType.id
                     )
                 )
-                navigator.navigateBack(this)
             }
         }
         return super.onOptionsItemSelected(item)
@@ -95,6 +98,7 @@ internal class EditAccountFragment : CoreFragment<AccountFragmentEditAccountBind
     }
 
     private fun handleLoadedAccount(accountEntity: AccountEntity?) {
+        hideProgress()
         accountEntity?.let {
             initialAccountEntity = it
             currentColor = ColorModel.from(it.color)
@@ -103,6 +107,16 @@ internal class EditAccountFragment : CoreFragment<AccountFragmentEditAccountBind
                 it.id, it.name, it.number, it.value, it.type, it.currency, it.color
             )
         }
+    }
+
+    private fun handleDeletedAccount(ignore: Unit?) {
+        hideProgress()
+        navigator.navigateBack(this)
+    }
+
+    private fun handleUpdatedAccount(ignore: Unit?) {
+        hideProgress()
+        navigator.navigateBack(this)
     }
 
     private fun initializeAdapters() {

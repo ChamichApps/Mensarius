@@ -6,6 +6,8 @@ import am.chamich.app.account.helpers.Matchers
 import am.chamich.app.account.models.ColorModel
 import am.chamich.app.account.models.CurrencyModel
 import am.chamich.app.account.models.TypeModel
+import androidx.test.espresso.matcher.ViewMatchers.assertThat
+import org.hamcrest.CoreMatchers.`is`
 
 internal abstract class AccountTestHelper {
 
@@ -71,16 +73,34 @@ internal abstract class AccountTestHelper {
         matchers.viewIsDisplayedAndContainsText(currency)
     }
 
+    // Assertions
+
+    protected fun assertAccountData(accountEntity: AccountEntity, id: Long) {
+        accountEntity.run {
+            val accountType = TypeModel.from(id.toInt() % TypeModel.values().size).id
+            val accountCurrency = CurrencyModel.from(id.toInt() % CurrencyModel.values().size).id
+            val accountColor = ColorModel.from(id.toInt() % ColorModel.values().size).id
+
+            assertThat(name, `is`("$ACCOUNT_NAME $id"))
+            assertThat(number, `is`("$ACCOUNT_NUMBER$id"))
+            assertThat(value, `is`("$ACCOUNT_INITIAL_VALUE$id".toLong()))
+            assertThat(type, `is`(accountType))
+            assertThat(currency, `is`(accountCurrency))
+            assertThat(color, `is`(accountColor))
+        }
+    }
+
     // Helpers
 
-    protected fun createAccount(number: Int) =
+    protected fun createAccount(id: Int) =
         AccountEntity(
-            name = "$ACCOUNT_NAME $number",
-            number = "$ACCOUNT_NUMBER$number",
-            value = "$ACCOUNT_INITIAL_VALUE$number".toLong(),
-            type = TypeModel.from(number % TypeModel.values().size).id,
-            color = ColorModel.from(number % ColorModel.values().size).id,
-            currency = CurrencyModel.from(number % CurrencyModel.values().size).id
+            id = id.toLong(),
+            name = "$ACCOUNT_NAME $id",
+            number = "$ACCOUNT_NUMBER$id",
+            value = "$ACCOUNT_INITIAL_VALUE$id".toLong(),
+            type = TypeModel.from(id % TypeModel.values().size).id,
+            color = ColorModel.from(id % ColorModel.values().size).id,
+            currency = CurrencyModel.from(id % CurrencyModel.values().size).id
         )
 
     companion object {

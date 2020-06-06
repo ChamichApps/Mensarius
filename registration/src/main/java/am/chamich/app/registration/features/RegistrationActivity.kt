@@ -54,6 +54,10 @@ internal class RegistrationActivity : AppCompatActivity(),
             navController.navigateUp()
         }
 
+    fun showProgress(show: Boolean) {
+        progressView.isVisible = show
+    }
+
     private fun initializeProgressAndDisableClicks() {
         progressView = findViewById(R.id.layout_progress)
         progressView.setOnTouchListener { _, _ -> true }
@@ -70,10 +74,6 @@ internal class RegistrationActivity : AppCompatActivity(),
                 .setFallbackOnNavigateUpListener(this)
                 .build()
         )
-    }
-
-    fun showProgress(show: Boolean) {
-        progressView.isVisible = show
     }
 
     companion object {

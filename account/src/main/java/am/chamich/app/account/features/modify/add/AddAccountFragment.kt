@@ -56,6 +56,7 @@ internal class AddAccountFragment : CoreFragment<AccountFragmentAddAccountBindin
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.action_save -> {
+                showProgress()
                 addAccountViewModel.saveAccount(
                     AccountEntity(
                         name = binding.edittextAccountName.textAsString,
@@ -72,6 +73,7 @@ internal class AddAccountFragment : CoreFragment<AccountFragmentAddAccountBindin
     }
 
     private fun handleLoadedAccount(id: Long?) {
+        hideProgress()
         navigator.navigateBack(this)
     }
 

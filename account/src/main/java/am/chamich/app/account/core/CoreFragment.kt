@@ -29,6 +29,14 @@ internal abstract class CoreFragment<T : ViewDataBinding> : Fragment() {
         (requireActivity() as? AccountsActivity)?.accountComponent
     }
 
+    protected fun showProgress() {
+        (requireActivity() as? AccountsActivity)?.showProgress(true)
+    }
+
+    protected fun hideProgress() {
+        (requireActivity() as? AccountsActivity)?.showProgress(false)
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

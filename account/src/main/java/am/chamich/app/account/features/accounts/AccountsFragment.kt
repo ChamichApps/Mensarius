@@ -34,6 +34,7 @@ internal class AccountsFragment : CoreFragment<AccountFragmentAccountsBinding>()
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.listener = ClickListeners()
+        showProgress()
         accountsViewModel.loadAccounts()
         initializeRecyclerView()
     }
@@ -48,6 +49,7 @@ internal class AccountsFragment : CoreFragment<AccountFragmentAccountsBinding>()
     }
 
     private fun handleLoadedAccounts(accounts: List<AccountEntity>?) {
+        hideProgress()
         accountsAdapter.setAccounts(accounts?.map {
             AccountModel(it.id, it.name, it.number, it.value, it.type, it.currency, it.color)
         } ?: emptyList())

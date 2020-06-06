@@ -15,13 +15,17 @@ internal class EditAccountViewModel @Inject constructor(
     private val repository: IAccountsRepository
 ) : ViewModel() {
 
-    private val success: MutableLiveData<AccountEntity> = MutableLiveData()
-    val loadedAccount: LiveData<AccountEntity> = success
+    private val successLoaded: MutableLiveData<AccountEntity> = MutableLiveData()
+    val loadedAccount: LiveData<AccountEntity> = successLoaded
+    private val successDeleted: MutableLiveData<Unit> = MutableLiveData()
+    val deletedAccount: LiveData<Unit> = successDeleted
+    private val successUpdated: MutableLiveData<Unit> = MutableLiveData()
+    val updatedAccount: LiveData<Unit> = successUpdated
 
     fun loadAccount(id: Long) {
         viewModelScope.launch {
             withContext(Dispatchers.IO) {
-                success.postValue(repository.loadAccount(id))
+                successLoaded.postValue(repository.loadAccount(id))
             }
         }
     }
@@ -29,7 +33,7 @@ internal class EditAccountViewModel @Inject constructor(
     fun deleteAccount(id: Long) {
         viewModelScope.launch {
             withContext(Dispatchers.IO) {
-                repository.deleteAccount(id)
+                successDeleted.postValue(repository.deleteAccount(id))
             }
         }
     }
@@ -37,7 +41,7 @@ internal class EditAccountViewModel @Inject constructor(
     fun updateAccount(accountEntity: AccountEntity) {
         viewModelScope.launch {
             withContext(Dispatchers.IO) {
-                repository.updateAccount(accountEntity)
+                successUpdated.postValue(repository.updateAccount(accountEntity))
             }
         }
     }

@@ -2,6 +2,7 @@
 
 <resources>
     <color name="account_color_white">#FFFFFF</color>
+    <color name="account_color_transparent_grey">#99FFFFFF</color>
 
 
     <color name="account_color_red">#E57373</color>
