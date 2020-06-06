@@ -4,15 +4,18 @@ import am.chamich.app.account.R
 import am.chamich.app.account.database.entity.AccountEntity
 import am.chamich.app.account.features.modify.edit.EditAccountFragment
 import am.chamich.app.account.helpers.Actions
+import am.chamich.app.account.helpers.DEFAULT_ACCOUNT_ID
 import am.chamich.app.account.helpers.Matchers
 import am.chamich.app.account.helpers.ViewModelFactory
 import am.chamich.app.account.models.ColorModel
 import am.chamich.app.account.models.CurrencyModel
 import am.chamich.app.account.models.TypeModel
+import am.chamich.app.account.navigation.api.INavigator
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentFactory
 import androidx.fragment.app.testing.FragmentScenario
 import androidx.fragment.app.testing.launchFragmentInContainer
+import androidx.lifecycle.MutableLiveData
 import io.mockk.every
 import io.mockk.mockk
 import io.mockk.slot
@@ -29,7 +32,12 @@ internal class AddAccountFragmentTest {
     private val matchers = Matchers()
     private val actions = Actions()
 
-    private val mockedViewModel: AddAccountViewModel = mockk(relaxed = true)
+    private val loadedAccountLiveData = MutableLiveData<Long>()
+
+    private val mockedViewModel: AddAccountViewModel = mockk(relaxed = true) {
+        every { loadedAccount } returns loadedAccountLiveData
+    }
+    private val mockedNavigator: INavigator = mockk(relaxed = true)
 
     @Before
     fun setup() {
@@ -72,6 +80,10 @@ internal class AddAccountFragmentTest {
 
     @Test
     fun when_UserAddsNewAccount_then_ViewModelReactsOnTheEvent() {
+        every { mockedViewModel.saveAccount(any()) } answers {
+            loadedAccountLiveData.postValue(DEFAULT_ACCOUNT_ID)
+        }
+
         actions.enterText(R.id.edittext_account_name, NEW_ACCOUNT_NAME)
         actions.enterText(R.id.edittext_bank_account_number, NEW_ACCOUNT_NUMBER)
         actions.enterText(R.id.edittext_initial_value, NEW_ACCOUNT_INITIAL_VALUE)
@@ -97,6 +109,8 @@ internal class AddAccountFragmentTest {
             assertThat(color, `is`(NEW_ACCOUNT_COLOR.id))
             assertThat(currency, `is`(NEW_ACCOUNT_CURRENCY.id))
         }
+
+        verify { mockedNavigator.navigateBack(fragment) }
     }
 
     private fun launchFragment(): FragmentScenario<EditAccountFragment> {
@@ -105,6 +119,7 @@ internal class AddAccountFragmentTest {
                 fragment = AddAccountFragment()
                     .apply {
                         viewModelFactory = ViewModelFactory(mockedViewModel)
+                        navigator = mockedNavigator
                     }
                 return fragment
             }

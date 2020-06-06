@@ -1,9 +1,7 @@
-package am.chamich.app.account.features.edit
+package am.chamich.app.account.features.modify.edit
 
 import am.chamich.app.account.R
 import am.chamich.app.account.database.entity.AccountEntity
-import am.chamich.app.account.features.modify.edit.EditAccountFragment
-import am.chamich.app.account.features.modify.edit.EditAccountViewModel
 import am.chamich.app.account.helpers.*
 import am.chamich.app.account.models.ColorModel
 import am.chamich.app.account.models.CurrencyModel
@@ -97,7 +95,7 @@ internal class EditAccountFragmentTest {
         })
 
         val slot = slot<AccountEntity>()
-        verify { mockedViewModel.saveAccount(capture(slot)) }
+        verify { mockedViewModel.updateAccount(capture(slot)) }
 
         slot.captured.run {
             assertThat(name, `is`(DEFAULT_ACCOUNT_NAME))
@@ -113,8 +111,14 @@ internal class EditAccountFragmentTest {
 
     @Test
     fun when_UserPressSaveAfterModifyingAccountData_then_AccountSavedAndFragmentNavigatesBack() {
-        actions.enterText(R.id.edittext_account_name, ACCOUNT_EDITED_NAME)
-        actions.enterText(R.id.edittext_bank_account_number, ACCOUNT_EDITED_NUMBER)
+        actions.enterText(
+            R.id.edittext_account_name,
+            ACCOUNT_EDITED_NAME
+        )
+        actions.enterText(
+            R.id.edittext_bank_account_number,
+            ACCOUNT_EDITED_NUMBER
+        )
         actions.performClick(R.id.edittext_account_color)
         actions.performClickOnPopupItem(ACCOUNT_EDITED_COLOR.colorResource)
         actions.performClick(R.id.edittext_account_type)
@@ -125,7 +129,7 @@ internal class EditAccountFragmentTest {
         })
 
         val slot = slot<AccountEntity>()
-        verify { mockedViewModel.saveAccount(capture(slot)) }
+        verify { mockedViewModel.updateAccount(capture(slot)) }
 
         slot.captured.run {
             assertThat(name, `is`(ACCOUNT_EDITED_NAME))

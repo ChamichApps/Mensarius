@@ -4,6 +4,7 @@ import am.chamich.app.account.R
 import am.chamich.app.account.core.CoreFragment
 import am.chamich.app.account.database.entity.AccountEntity
 import am.chamich.app.account.databinding.AccountFragmentAddAccountBinding
+import am.chamich.app.account.extensions.observe
 import am.chamich.app.account.extensions.textAsString
 import am.chamich.app.account.extensions.viewModel
 import am.chamich.app.account.features.modify.adapters.ColorAdapter
@@ -36,7 +37,7 @@ internal class AddAccountFragment : CoreFragment<AccountFragmentAddAccountBindin
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         addAccountViewModel = viewModel(viewModelFactory) {
-            // This model observes nothing
+            observe(loadedAccount, ::handleLoadedAccount)
         }
     }
 
@@ -68,6 +69,10 @@ internal class AddAccountFragment : CoreFragment<AccountFragmentAddAccountBindin
             }
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    private fun handleLoadedAccount(id: Long?) {
+        navigator.navigateBack(this)
     }
 
     private fun onColorChanged(newColor: ColorModel?) {

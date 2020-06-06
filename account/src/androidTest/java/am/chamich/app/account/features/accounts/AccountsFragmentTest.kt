@@ -38,10 +38,26 @@ internal class AccountsFragmentTest {
 
         launchFragment()
 
-        matchers.a(R.id.recyclerview_accounts, 0, ACCOUNT_1_NAME)
-        matchers.a(R.id.recyclerview_accounts, 0, ACCOUNT_1_TYPE.stringResource)
-        matchers.a(R.id.recyclerview_accounts, 1, ACCOUNT_2_NAME)
-        matchers.a(R.id.recyclerview_accounts, 1, ACCOUNT_2_TYPE.stringResource)
+        matchers.viewIsDisplayedInRecyclerViewAtPosition(
+            R.id.recyclerview_accounts,
+            0,
+            ACCOUNT_1_NAME
+        )
+        matchers.viewIsDisplayedInRecyclerViewAtPosition(
+            R.id.recyclerview_accounts,
+            0,
+            ACCOUNT_1_TYPE.stringResource
+        )
+        matchers.viewIsDisplayedInRecyclerViewAtPosition(
+            R.id.recyclerview_accounts,
+            1,
+            ACCOUNT_2_NAME
+        )
+        matchers.viewIsDisplayedInRecyclerViewAtPosition(
+            R.id.recyclerview_accounts,
+            1,
+            ACCOUNT_2_TYPE.stringResource
+        )
     }
 
 

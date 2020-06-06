@@ -16,12 +16,20 @@ import org.hamcrest.Matcher
 
 class Matchers {
 
-    fun a(@IdRes resourceId: Int, position: Int, text: String) {
+    fun viewIsDisplayedInRecyclerViewAtPosition(
+        @IdRes resourceId: Int,
+        position: Int,
+        text: String
+    ) {
         onView(withId(resourceId))
             .check(matches(atPosition(position, hasDescendant(withText(text)))))
     }
 
-    fun a(@IdRes resourceId: Int, position: Int, @StringRes stringResource: Int) {
+    fun viewIsDisplayedInRecyclerViewAtPosition(
+        @IdRes resourceId: Int,
+        position: Int,
+        @StringRes stringResource: Int
+    ) {
         onView(withId(resourceId))
             .check(matches(atPosition(position, hasDescendant(withText(stringResource)))))
     }

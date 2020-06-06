@@ -64,7 +64,7 @@ internal class EditAccountFragment : CoreFragment<AccountFragmentEditAccountBind
                 navigator.navigateBack(this)
             }
             R.id.action_save -> {
-                editAccountViewModel.saveAccount(
+                editAccountViewModel.updateAccount(
                     initialAccountEntity.copy(
                         name = binding.edittextAccountName.textAsString,
                         number = binding.edittextBankAccountNumber.textAsString,
