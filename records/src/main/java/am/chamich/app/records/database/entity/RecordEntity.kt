@@ -3,7 +3,6 @@ package am.chamich.app.records.database.entity
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import java.util.*
 
 @Entity(tableName = "records")
 internal data class RecordEntity(
@@ -25,7 +24,7 @@ internal data class RecordEntity(
     val note: String,
 
     @ColumnInfo(name = "date")
-    val date: Date,
+    val date: Long,
 
     @ColumnInfo(name = "account_type")
     val accountType: Int,

@@ -80,4 +80,5 @@ dependencies {
     androidTestImplementation "androidx.test.espresso:espresso-contrib:3.2.0"
     androidTestImplementation "io.mockk:mockk-android:1.10.0"
 
-    kaptAndroidTest "androidx.databinding:databinding-compiler:4.0.0"}
+    kaptAndroidTest "androidx.databinding:databinding-compiler:4.0.0"
+}
