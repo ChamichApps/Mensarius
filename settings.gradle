@@ -1,3 +1,4 @@
+include ':Records'
 rootProject.name='Mensarius'
 include ':app'
 include ':onboarding'
