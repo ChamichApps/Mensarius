@@ -1,6 +1,6 @@
-include ':records'
 rootProject.name='Mensarius'
 include ':app'
 include ':onboarding'
 include ':registration'
 include ':account'
+include ':records'
